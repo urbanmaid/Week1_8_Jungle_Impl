@@ -50,7 +50,7 @@ MonoBehaviour:
   health: 10
   moveSpeed: 1
   inRange: 0
-  collisionDamage: 20
+  collisionDamage: 40
   projectile: {fileID: 0}
   fireRate: 0
   range: 0

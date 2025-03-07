@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38ed3c7ab02215f4481870e95af9139e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 10
-  damage: 5
+  projectileSpeed: 16
+  damage: 1
   projectileParticle: {fileID: 3579562247292487899, guid: 8a6f4f53fee67f8469a522254c1d73f9, type: 3}
 --- !u!1001 &8063393561594243699
 PrefabInstance:

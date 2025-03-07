@@ -48,12 +48,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isShootable: 1
-  health: 10
-  moveSpeed: 3
+  health: 4
+  moveSpeed: 3.5
   inRange: 0
-  collisionDamage: 2
+  collisionDamage: 15
   projectile: {fileID: 5344438850300829464, guid: 0aaf5d73385cd3e429e3a5adefd2edd3, type: 3}
-  fireRate: 1.5
+  fireRate: 1
   range: 7.5
   enemyScore: 10
   itemSpawnTimeManager: {fileID: 0}

@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
             shooter.transform.rotation = Quaternion.Euler(0, 0, angle);
 
             Vector2 moveDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-            transform.Translate(moveDir.normalized * Mathf.Lerp(0, curSpeed, 0.5f) * Time.deltaTime, Space.World);
+            transform.Translate(moveDir.normalized * curSpeed * Time.deltaTime, Space.World);
             if (coolDown > 0)
             {
                 coolDown -= Time.deltaTime;

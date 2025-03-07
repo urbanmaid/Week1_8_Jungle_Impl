@@ -208,7 +208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5227869161999598462, guid: ccf03cc6ccb5dbb448842ad42b8e6bf1, type: 3}
       propertyPath: m_Name
-      value: ItemRam
+      value: ItemRush
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
