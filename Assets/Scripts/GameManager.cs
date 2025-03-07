@@ -38,13 +38,8 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         curHealth = maxHealth;
-        //missileAmount = 0;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         
+        //missileAmount = 0;
     }
 
     public void DamagePlayer(float damage)

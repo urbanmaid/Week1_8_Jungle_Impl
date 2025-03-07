@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
     public float health;
     public float moveSpeed;
     public bool inRange;
+    [SerializeField] float angle;
+    [SerializeField] float distance;
 
     [SerializeField] protected float collisionDamage;
     [SerializeField] GameObject projectile;
@@ -21,6 +23,7 @@ public class EnemyController : MonoBehaviour
     private bool canDamage;
 
     [SerializeField] float range;
+    private readonly float availableRange = 26f;
 
     [SerializeField] protected int enemyScore = 1;
 
@@ -50,9 +53,9 @@ public class EnemyController : MonoBehaviour
         {
             //Enemy movement and rotation
             Vector2 moveDir = player.transform.position - transform.position;
-            float angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+            angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
-            float distance = Vector2.Distance(player.transform.position, transform.position);
+            distance = Vector2.Distance(player.transform.position, transform.position);
             inRange = distance < range;
             if (isShootable)
             {
@@ -73,8 +76,14 @@ public class EnemyController : MonoBehaviour
                         cooldown = fireRate;
                     }
                 }
-            } else {
+            }
+            else {
                 enemyRb.linearVelocity = moveDir.normalized * moveSpeed;
+            }
+
+            if(distance > availableRange)
+            {
+                Destroy(gameObject);
             }
 
         }
