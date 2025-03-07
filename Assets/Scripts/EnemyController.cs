@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody2D enemyRb;
     protected GameObject player;
     [SerializeField] bool isShootable = true;
+    [SerializeField] bool isSteerable = true;
 
     [Header("Enemy Info")]
     public float health;
@@ -15,6 +16,7 @@ public class EnemyController : MonoBehaviour
     public bool inRange;
     [SerializeField] float angle;
     [SerializeField] float distance;
+    private Vector2 moveDir;
 
     [SerializeField] protected float collisionDamage;
     [SerializeField] GameObject projectile;
@@ -45,6 +47,9 @@ public class EnemyController : MonoBehaviour
         itemSpawnTimeManager = ItemSpawnTimeManager.instance;
         gm = GameManager.instance;
         canDamage = true;
+
+        // For someone which is not steerable
+        Steer();
     }
 
     void Update()
@@ -52,9 +57,10 @@ public class EnemyController : MonoBehaviour
         if (gm.isPlaying)
         {
             //Enemy movement and rotation
-            Vector2 moveDir = player.transform.position - transform.position;
-            angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0, 0, angle);
+            if(isSteerable)
+            {
+                Steer();
+            }
             distance = Vector2.Distance(player.transform.position, transform.position);
             inRange = distance < range;
             if (isShootable)
@@ -92,6 +98,13 @@ public class EnemyController : MonoBehaviour
             enemyRb.linearVelocity = Vector2.zero;
         }
 
+    }
+
+    private void Steer()
+    {
+        moveDir = player.transform.position - transform.position;
+        angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     public virtual void Damage(float dmgAmount)

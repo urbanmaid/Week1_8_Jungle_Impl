@@ -4422,13 +4422,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 983784275}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39849ab8dfbab244e9b8849e6501dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 3036083365682430201, guid: 8c05765ebca1d664abd33c3bdd1280df, type: 3}
+  - {fileID: 6594762690197060280, guid: 6ca5580b06bbf9b4c9b063b6351751e3, type: 3}
   spawnInterval: 5
   spawnIntervalCoolTime: 4.5
   spawnIntervalMin: 1.5
