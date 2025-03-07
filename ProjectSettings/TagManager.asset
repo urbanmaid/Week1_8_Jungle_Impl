@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - Enemy Range
+  - Player Projectile
+  - Enemy Projectile
+  - Limit
+  - Missile Projectile
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Enemy
+  - Water
+  - UI
+  - BlackHoleRange
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Bakcground
+    uniqueID: 2285974451
+    locked: 0
+  - name: Obstacles
+    uniqueID: 2537728219
+    locked: 0
+  - name: Projectiles
+    uniqueID: 2149439559
+    locked: 0
+  - name: Enemy
+    uniqueID: 399488989
+    locked: 0
+  - name: Player
+    uniqueID: 625706405
+    locked: 0
+  m_RenderingLayers:
+  - Default
