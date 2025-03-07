@@ -46,11 +46,13 @@ public class BossEnemy : EnemyController
             Destroy(gameObject);
             GameManager.instance.IncreaseScore(enemyScore);
             UIManager.instance.Upgrade();
+            UIManager.instance.ActivateAnnoucer(13);
+
             gm.player.GetComponent<PlayerInterfaceController>().SetBossNotifier(false);
         }
         else if ((health <= 20) && (initHealth > initHealthAnnounceCriterion))
         {
-            UIManager.instance.ActivateAnnoucer(9);
+            UIManager.instance.ActivateAnnoucer(12);
         }
 
         if (!GameManager.instance.isPlaying)

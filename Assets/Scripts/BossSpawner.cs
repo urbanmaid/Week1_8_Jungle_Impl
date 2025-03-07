@@ -60,7 +60,7 @@ public class BossSpawner : MonoBehaviour
         bossLifeCurrent += 2 * bossSpawnedCount;
         Debug.Log("Boss life: " + bossLifeCurrent);
 
-        UIManager.instance.ActivateAnnoucer(8);
+        UIManager.instance.ActivateAnnoucer(11);
     }
 
     private Vector3 SetSpawnLocation()

@@ -5,6 +5,8 @@ using Random = UnityEngine.Random;
 
 public class RandomEnemySpawner : MonoBehaviour
 {
+    public static RandomEnemySpawner instance;
+
     [Header("Generic")]
     public List<GameObject> enemyList;
     private GameObject player;
@@ -27,6 +29,8 @@ public class RandomEnemySpawner : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         pc = player.GetComponent<PlayerController>();
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+
+        instance = this;
     }
 
     internal void SetIntervalMin(float spawnIntervalMinInput)
@@ -68,7 +72,7 @@ public class RandomEnemySpawner : MonoBehaviour
     {
         if(spawnInterval < spawnIntervalCoolTime){
             spawnInterval = spawnIntervalCoolTime;
-            Debug.Log("Enemy spawning Time gets slower due to the item");
+            Debug.Log(instance + "'s spawning Time gets slower due to the item");
         }
     }
 }

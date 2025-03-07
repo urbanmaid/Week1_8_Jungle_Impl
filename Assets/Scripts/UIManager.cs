@@ -55,6 +55,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] string quoteAmateur;
     [SerializeField] string quoteIntermediate;
     [SerializeField] string quotePro;
+    
     void Awake()
     {
         if (instance == null)
@@ -69,7 +70,7 @@ public class UIManager : MonoBehaviour
         time = 0;
         min = 0;
         sec = 0;
-        scoreTimer = 0f;
+        //scoreTimer = 0f;
 
         upgradeStringInit = upgradeConfirmText.text;
     }
@@ -79,12 +80,14 @@ public class UIManager : MonoBehaviour
         
         if (gm.isPlaying)
         {
+            /*
             scoreTimer += Time.deltaTime;
             if(scoreTimer >= scoreInterval){
-                gm.totalScore += 1;
+                //gm.totalScore += 1;
                 scoreTimer = 0f;
-                UpdateScore();
+                //UpdateScore();
             }
+            */
             time += Time.deltaTime;
             UpdateTimer();
         }
@@ -139,12 +142,17 @@ public class UIManager : MonoBehaviour
 
     public void Upgrade()
     {
+        Invoke(nameof(ShowUpgradePanel), 2.25f);
+    }
+
+    public void ShowUpgradePanel()
+    {
         if (gm.isPlaying)
         {
             gm.isPlaying = false;
             upgradePanel.SetActive(true);
+            gameInfo.SetActive(false);
         }
-
     }
 
     public void SetUpgradeCode(int code)
@@ -162,19 +170,19 @@ public class UIManager : MonoBehaviour
         switch (upgradeCode)
         {
             case 0:
-                //upgrade move speed;
+                //upgrade missile spec
                 gm.player.GetComponent<PlayerController>().moveSpeed *= 1.5f;
                 moveLvl += 1;
                 moveLvlText.text = "Lv. " + moveLvl;
                 break;
             case 1:
-                //upgrade attack speed;
-                gm.player.GetComponent<PlayerController>().fireRate *= 0.9f;
+                //upgrade attack speed
+                gm.player.GetComponent<PlayerController>().fireRate *= 0.8f;
                 attackLvl += 1;
                 attackLvlText.text = "Lv. " + attackLvl;
                 break;
             case 2:
-                //upgrade skill power;
+                //upgrade skill power
                 gm.player.GetComponent<PlayerController>().skillPower *= 1.5f;
                 skillLvl += 1;
                 skillLvlText.text = "Lv. " + skillLvl;
@@ -184,7 +192,11 @@ public class UIManager : MonoBehaviour
                 break;
         }
         gm.isPlaying = true;
+
+        gameInfo.SetActive(true);
         upgradePanel.SetActive(false);
+
+        statusAnnouncer.ActivateAnnoucer(7+upgradeCode);
     }
 
     public void EndGame()

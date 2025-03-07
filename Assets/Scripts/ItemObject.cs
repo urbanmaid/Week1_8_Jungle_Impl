@@ -17,7 +17,7 @@ public class ItemObject : MonoBehaviour
     private PlayerInterfaceController playerInterfaceController;
 
     [SerializeField] float healMount = 10f;
-    [SerializeField] int missileAmount = 5;
+    [SerializeField] int missileAmount = 8;
 
     private void Start()
     {
@@ -31,10 +31,12 @@ public class ItemObject : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         transform.Rotate(Vector3.forward, rotSpeed * Time.deltaTime);
     }
+    */
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -55,17 +57,29 @@ public class ItemObject : MonoBehaviour
         switch (itemCode)
         {
             case 0:
+                //Debug.Log("Health has been increased.");
                 gm.DamagePlayer(-1 * healMount);
-                Debug.Log("Health has been increased.");
+                UIManager.instance.ActivateAnnoucer(3);
                 break;
             case 1:
                 gm.missileAmount += this.missileAmount;
-                Debug.Log("Missile amount has been increased into " + missileAmount);
+                //Debug.Log("Missile amount has been increased into " + missileAmount);
                 UIManager.instance.UpdateMissile();
+                UIManager.instance.ActivateAnnoucer(4);
                 break;
             case 2:
-                Debug.Log("Skill item activated.");
-                UseSkill();            
+                //Debug.Log("Signal jammmer.");
+                RandomEnemySpawner.instance.RequestCooltime();
+                UIManager.instance.ActivateAnnoucer(5);
+                break;
+            case 10:
+                Debug.Log("Achived 1 Rush Item");
+                break;
+            case 11:
+                Debug.Log("Achived 1 Blackhole Item");
+                break;
+            case 12:
+                Debug.Log("Achived 1 Shield Item");
                 break;
             default:
                 Debug.LogError("Invalid item code detected, no effect applied.");

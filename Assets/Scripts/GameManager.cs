@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
             isPlaying = false;
             player.SetActive(false);
             UIManager.instance.EndGame();
-            
         }
         else if(curHealth < 25){
             UIManager.instance.ActivateAnnoucer(1);
@@ -77,7 +76,7 @@ public class GameManager : MonoBehaviour
     {
         while (isPlaying)
         {
-            totalScore++;
+            //totalScore++;
             yield return new WaitForSeconds(1.0f);
             UIManager.instance.UpdateScore();
         }

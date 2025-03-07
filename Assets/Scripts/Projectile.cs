@@ -16,6 +16,8 @@ public class Projectile : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
         theRb = GetComponent<Rigidbody2D>();
         theRb.linearVelocity = transform.right * projectileSpeed;
+        
+        Invoke(nameof(OnBecameInvisible), 6f);
     }
 
     void OnBecameInvisible()
@@ -40,6 +42,7 @@ public class Projectile : MonoBehaviour
         else if (gameObject.CompareTag("Missile Projectile") && collision.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            SpawnParticles();
             enemy.Damage(damage);
         }
     }
