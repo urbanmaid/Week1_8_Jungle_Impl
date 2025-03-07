@@ -14,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moveLvlText, attackLvlText, skillLvlText;
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
+    [SerializeField] TextMeshProUGUI upgradeConfirmText;
     [SerializeField] StatusAnnouncer statusAnnouncer;
 
     [Header("Menu Configuration")]
@@ -37,6 +38,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] int moveLvl;
     [SerializeField] int attackLvl;
     [SerializeField] int skillLvl;
+    private int upgradeCode;
+    private string upgradeStringInit;
     private float time;
     private int min;
     private int sec;
@@ -67,6 +70,8 @@ public class UIManager : MonoBehaviour
         min = 0;
         sec = 0;
         scoreTimer = 0f;
+
+        upgradeStringInit = upgradeConfirmText.text;
     }
 
     void Update()
@@ -142,7 +147,17 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void UpgradeChoice(int upgradeCode)
+    public void SetUpgradeCode(int code)
+    {
+        upgradeCode = code;
+    }
+
+    public void SetUpgradeCodeText(string text)
+    {
+        upgradeConfirmText.text = text + upgradeStringInit;
+    }
+
+    public void ConfirmUpgrade()
     {
         switch (upgradeCode)
         {
@@ -161,6 +176,7 @@ public class UIManager : MonoBehaviour
             case 2:
                 //upgrade skill power;
                 gm.player.GetComponent<PlayerController>().skillPower *= 1.5f;
+                skillLvl += 1;
                 skillLvlText.text = "Lv. " + skillLvl;
                 break;
             default:
