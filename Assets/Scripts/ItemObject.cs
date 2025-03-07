@@ -27,6 +27,7 @@ public class ItemObject : MonoBehaviour
         playerInterfaceController = GameObject.Find("Player").GetComponent<PlayerInterfaceController>();
 
         playerInterfaceController.SetItemObject(gameObject);
+        UIManager.instance.ActivateAnnoucer(2);
     }
 
     // Update is called once per frame

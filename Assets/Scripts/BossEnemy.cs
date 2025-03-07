@@ -8,6 +8,8 @@ public class BossEnemy : EnemyController
 {
     [Header("Boss Enemy")]
     public float bossMoveSpeed = 1;
+    private float initHealth = 0;
+    private readonly float initHealthAnnounceCriterion = 50;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -46,6 +48,10 @@ public class BossEnemy : EnemyController
             UIManager.instance.Upgrade();
             gm.player.GetComponent<PlayerInterfaceController>().SetBossNotifier(false);
         }
+        else if ((health <= 20) && (initHealth > initHealthAnnounceCriterion))
+        {
+            UIManager.instance.ActivateAnnoucer(9);
+        }
 
         if (!GameManager.instance.isPlaying)
         {
@@ -76,6 +82,7 @@ public class BossEnemy : EnemyController
     internal void SetLife(float healthInput)
     {
         health = healthInput;
+        initHealth = healthInput;
         Debug.Log("Boss life: " + health);
     }
 }

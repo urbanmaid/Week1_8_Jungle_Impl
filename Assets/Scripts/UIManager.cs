@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Rendering;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moveLvlText, attackLvlText, skillLvlText;
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
+    [SerializeField] StatusAnnouncer statusAnnouncer;
 
     [Header("Menu Configuration")]
     [SerializeField] GameObject startPanel;
@@ -108,6 +110,11 @@ public class UIManager : MonoBehaviour
         timerText.text = min + ":" + sec.ToString("D2");
     }
 
+    internal void ActivateAnnoucer(int code)
+    {
+        statusAnnouncer.ActivateAnnoucer(code);
+    }
+
     public void StartGame()
     {
         startPanel.SetActive(false);
@@ -117,6 +124,12 @@ public class UIManager : MonoBehaviour
         gm.player.SetActive(true);
         gm.managers.SetActive(true);
         gameInfo.SetActive(true);
+        Invoke(nameof(StartAnnouce), 2f);
+    }
+
+    private void StartAnnouce()
+    {
+        statusAnnouncer.ActivateAnnoucer(0);
     }
 
     public void Upgrade()

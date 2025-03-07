@@ -61,6 +61,9 @@ public class GameManager : MonoBehaviour
             UIManager.instance.EndGame();
             
         }
+        else if(curHealth < 25){
+            UIManager.instance.ActivateAnnoucer(1);
+        }
         else if(curHealth > maxHealth)
         {
             Debug.Log("Health Overflow detected, resetting health to max.");

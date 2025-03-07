@@ -9,6 +9,7 @@ public class ItemSpawnTimeManager : MonoBehaviour
 
     [Header("Generic")]
     private float timeSinceLastSpawn = 0f;
+    [SerializeField] float spawnIntervalInit = 30f;
     [SerializeField] float spawnInterval = 30f;
     [SerializeField] bool isAbleToSpawn = false; // If true, enemy has able to spawn item when they are dead
     [SerializeField] bool isSpawned = false; // If true, item is not spawned anymore
@@ -19,6 +20,7 @@ public class ItemSpawnTimeManager : MonoBehaviour
     void Awake()
     {
         instance = this;
+        timeSinceLastSpawn = -spawnIntervalInit + spawnInterval;
     }
 
     // Update is called once per frame
@@ -30,7 +32,7 @@ public class ItemSpawnTimeManager : MonoBehaviour
             {
                 isAbleToSpawn = true;
                 timeSinceLastSpawn = 0f;
-                Debug.Log("Item is able to be spawned, destroy enemy and get Items.");
+                //Debug.Log("Item is able to be spawned, destroy enemy and get Items.");
             }
         }
     }
