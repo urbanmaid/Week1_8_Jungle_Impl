@@ -31,13 +31,13 @@ public class CameraController : MonoBehaviour
     }
 
     float MakeDamageFXMagnitude(){
-        return Random.Range(-0.2f, 0.2f);
+        return Random.Range(-0.25f, 0.25f);
     }
 
     // Is only called when player got damage in positive value(damaging)
     public void ShakeCamera(){
         inDamange = true;
-        Invoke(nameof(StopShake), 0.1f);
+        Invoke(nameof(StopShake), 0.15f);
     }
 
     private void StopShake()

@@ -4399,7 +4399,7 @@ MonoBehaviour:
   spawnIntervalCoolTime: 2
   spawnIntervalMin: 0.8
   spawnIntervalModScale: -0.05
-  distFromPlayerToEnemy: 25
+  distFromPlayerToEnemy: 24
 --- !u!4 &983784277
 Transform:
   m_ObjectHideFlags: 0
@@ -4433,7 +4433,7 @@ MonoBehaviour:
   spawnIntervalCoolTime: 4.5
   spawnIntervalMin: 1.5
   spawnIntervalModScale: -0.1
-  distFromPlayerToEnemy: 25
+  distFromPlayerToEnemy: 24
 --- !u!114 &983784279
 MonoBehaviour:
   m_ObjectHideFlags: 0
