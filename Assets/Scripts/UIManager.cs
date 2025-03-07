@@ -6,6 +6,7 @@ using UnityEngine.Rendering;
 
 public class UIManager : MonoBehaviour
 {
+    [Header("Gameplay")]
     public static UIManager instance;
     private GameManager gm;
     [SerializeField] TextMeshProUGUI healthText, missileText, scoreText, timerText;
@@ -13,8 +14,27 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
 
-    [SerializeField] GameObject startPanel, upgradePanel, endPanel, gameInfo;
-    [SerializeField] int moveLvl, attackLvl, skillLvl;
+    [Header("Menu Configuration")]
+    [SerializeField] GameObject startPanel;
+    [SerializeField] GameObject upgradePanel;
+    [SerializeField] GameObject endPanel;
+    [SerializeField] GameObject gameInfo; 
+    [SerializeField] GameObject instructionPanel;
+    
+    [Header("Instruction")]
+    [SerializeField] TextMeshProUGUI instructionText;
+    [SerializeField] TextAsset instructionContent;
+    [SerializeField] GameObject[] instructionContentSprite;
+
+    private int instructionContentIndex = 0;
+    private int instructionContentLength = 0;
+    private string[] instructionContentString;
+    private GameObject instructionContentSpriteNow;
+
+    [Header("Status")]
+    [SerializeField] int moveLvl;
+    [SerializeField] int attackLvl;
+    [SerializeField] int skillLvl;
     private float time;
     private int min;
     private int sec;
@@ -91,6 +111,8 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         startPanel.SetActive(false);
+        instructionPanel.SetActive(false);
+
         gm.isPlaying = true;
         gm.player.SetActive(true);
         gm.managers.SetActive(true);
@@ -145,8 +167,6 @@ public class UIManager : MonoBehaviour
         scoreTextGameOver.text = "" + gm.totalScore;
     }
 
-
-
     private void EvaulateScore()
     {
         if (gm.totalScore < scoreCutAmateur)
@@ -176,5 +196,61 @@ public class UIManager : MonoBehaviour
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    public void ShowInstruction()
+    {
+        startPanel.SetActive(false);
+        instructionPanel.SetActive(true);
+
+        instructionContentIndex = 0;
+        instructionContentString = instructionContent.text.Split('\n');
+
+        instructionContentLength = instructionContentString.Length;
+
+        Debug.Log("Length of dialogue: " + instructionContentLength);
+
+        // Set text and sprite
+        instructionText.text = instructionContentString[instructionContentIndex];
+        RefreshInstructionSprite();
+    }
+
+    public void InstructionControllPrev()
+    {
+        if(instructionContentIndex > 0)
+        {
+            instructionContentIndex -= 1;
+            RefreshInstructionSprite();
+            instructionText.text = instructionContentString[instructionContentIndex];
+        }
+    }
+
+    public void InstructionControllNext()
+    {
+        if(instructionContentIndex < instructionContentLength - 1)
+        {
+            instructionContentIndex += 1;
+            RefreshInstructionSprite();
+            instructionText.text = instructionContentString[instructionContentIndex];
+        }
+        else
+        {
+            StartGame();
+        }
+    }
+
+    public void RefreshInstructionSprite()
+    {
+        Destroy(instructionContentSpriteNow);
+        if(instructionContentSprite[instructionContentIndex] != null)
+        {
+            instructionContentSpriteNow = Instantiate(instructionContentSprite[instructionContentIndex], transform.position, Quaternion.identity);
+        }
+    }
+
+    public void CloseInstruction()
+    {
+        instructionPanel.SetActive(false);
+        startPanel.SetActive(true);
     }
 }
