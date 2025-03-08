@@ -24,14 +24,6 @@ public class ItemObject : MonoBehaviour
         UIManager.instance.ActivateAnnoucer(2);
     }
 
-    // Update is called once per frame
-    /*
-    void Update()
-    {
-        transform.Rotate(Vector3.forward, rotSpeed * Time.deltaTime);
-    }
-    */
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -63,7 +55,7 @@ public class ItemObject : MonoBehaviour
                 break;
             case 2:
                 //Debug.Log("Signal jammmer.");
-                RandomEnemySpawner.instance.RequestCooltime();
+                CallRequestCooltimeOnAllSpawners();
                 UIManager.instance.ActivateAnnoucer(5);
                 break;
             case 10:
@@ -83,7 +75,10 @@ public class ItemObject : MonoBehaviour
 
     private void CallRequestCooltimeOnAllSpawners()
     {
-        
+        foreach (RandomEnemySpawner spawner in RandomEnemySpawner.instances)
+        {
+            spawner.RequestCooltime();
+        }
     }
 
     public void UseSkill()

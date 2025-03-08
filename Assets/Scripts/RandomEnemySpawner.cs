@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public class RandomEnemySpawner : MonoBehaviour
 {
-    public static RandomEnemySpawner instance;
+    public static List<RandomEnemySpawner> instances = new List<RandomEnemySpawner>();
 
     [Header("Generic")]
     public List<GameObject> enemyList;
@@ -35,8 +35,15 @@ public class RandomEnemySpawner : MonoBehaviour
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
         bs = gameObject.GetComponent<BossSpawner>(); //Finds the BossSpawner script attached to the same GameObject
 
-        instance = this;
+        instances.Add(this);
+        //Debug.Log("RandomEnemySpawner has been added to the list of instances, current count: " + instances.Count);
     }
+
+    void OnDestroy()
+    {
+        instances.Remove(this);
+    }
+
 
     internal void SetIntervalMin(float spawnIntervalMinInput)
     {
@@ -77,7 +84,7 @@ public class RandomEnemySpawner : MonoBehaviour
     {
         if(spawnInterval < spawnIntervalCoolTime){
             spawnInterval = spawnIntervalCoolTime;
-            Debug.Log(instance + "'s spawning Time gets slower due to the item");
+            //Debug.Log(this + "'s spawning Time gets slower due to the item");
         }
     }
 }
