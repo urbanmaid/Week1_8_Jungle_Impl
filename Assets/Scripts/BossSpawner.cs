@@ -58,9 +58,9 @@ public class BossSpawner : MonoBehaviour
         bossObject.GetComponent<BossEnemy>().SetLife(bossLifeCurrent);
 
         bossLifeCurrent += 2 * bossSpawnedCount;
-        Debug.Log("Boss life: " + bossLifeCurrent);
+        //Debug.Log("Boss life: " + bossLifeCurrent);
 
-        UIManager.instance.ActivateAnnoucer(11);
+        UIManager.instance.ActivateAnnoucer(13);
     }
 
     private Vector3 SetSpawnLocation()

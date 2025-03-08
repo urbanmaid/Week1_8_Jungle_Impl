@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [Header("Gameplay")]
     public static UIManager instance;
     private GameManager gm;
-    [SerializeField] TextMeshProUGUI healthText, missileText, scoreText, timerText;
+    [SerializeField] TextMeshProUGUI healthText, missileText, scoreText, timerText, phaseText;
     [SerializeField] TextMeshProUGUI moveLvlText, attackLvlText, skillLvlText;
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
     private GameObject instructionContentSpriteNow;
 
     [Header("Status")]
-    [SerializeField] int moveLvl;
+    [SerializeField] int missileLvl;
     [SerializeField] int attackLvl;
     [SerializeField] int skillLvl;
     private int upgradeCode;
@@ -99,6 +99,11 @@ public class UIManager : MonoBehaviour
         missileText.text = "" + gm.missileAmount;
     }
 
+    public void UpdatePhase()
+    {
+        phaseText.text = "" + gm.curPhase;
+    }
+
     void UpdateTimer()
     {
         min = (int)(time / 60f);
@@ -160,8 +165,8 @@ public class UIManager : MonoBehaviour
             case 0:
                 //upgrade missile spec
                 gm.player.GetComponent<PlayerController>().moveSpeed *= 1.5f;
-                moveLvl += 1;
-                moveLvlText.text = "Lv. " + moveLvl;
+                missileLvl += 1;
+                moveLvlText.text = "Lv. " + missileLvl;
                 break;
             case 1:
                 //upgrade attack speed
@@ -184,7 +189,8 @@ public class UIManager : MonoBehaviour
         gameInfo.SetActive(true);
         upgradePanel.SetActive(false);
 
-        statusAnnouncer.ActivateAnnoucer(7+upgradeCode);
+        statusAnnouncer.ActivateAnnoucer(8+upgradeCode);
+        GameManager.instance.AddPhase();
     }
 
     public void EndGame()

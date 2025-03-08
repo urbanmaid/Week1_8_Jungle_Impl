@@ -51,7 +51,7 @@ MonoBehaviour:
   isSteerable: 1
   health: 8
   moveSpeed: 3
-  collisionDamage: 10
+  collisionDamage: 20
   projectile: {fileID: 5344438850300829464, guid: ceadce519b280a04db913fdfa649755e, type: 3}
   fireRate: 4
   range: 8
@@ -142,7 +142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3304952091178587962, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7071068
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3304952091178587962, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_LocalRotation.x
@@ -154,7 +154,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3304952091178587962, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.7071068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3304952091178587962, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -166,7 +166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3304952091178587962, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -90
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6876879707939268182, guid: f264bcc3c67ece64fa9b564e1dd6a9fd, type: 3}
       propertyPath: m_Name

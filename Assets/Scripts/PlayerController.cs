@@ -117,24 +117,11 @@ public class PlayerController : MonoBehaviour
         } else {
             playerRb.linearVelocity = Vector2.zero;
         }
-
-
-        // if (Input.GetKeyDown(KeyCode.Alpha2) && !isChargeing)
-        // {
-        //     Charge();
-
-        // }
-
-        // if (Input.GetKeyDown(KeyCode.Alpha3) && !isShielded)
-        // {
-        //     Shield();
-
-        // }
     }
 
     void Shoot()
     {
-        Instantiate(projectile, transform.position, shooter.transform.rotation);
+        Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, -90f) + shooter.transform.rotation.eulerAngles));
         coolDown = fireRate;
     }
 

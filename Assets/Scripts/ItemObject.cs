@@ -6,7 +6,7 @@ public class ItemObject : MonoBehaviour
 
     //private float rotSpeed = 8f;
     private GameManager gm;
-    private ItemSpawnTimeManager itemSpawnTimeManager;
+    private ItemSpawnConditionManager itemSpawnConditionManager;
     private PlayerController playerController;
     private PlayerInterfaceController playerInterfaceController;
 
@@ -16,12 +16,12 @@ public class ItemObject : MonoBehaviour
     private void Start()
     {
         gm = GameManager.instance;
-        itemSpawnTimeManager = ItemSpawnTimeManager.instance;
+        itemSpawnConditionManager = ItemSpawnConditionManager.instance;
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         playerInterfaceController = GameObject.Find("Player").GetComponent<PlayerInterfaceController>();
 
         playerInterfaceController.SetItemObject(gameObject);
-        UIManager.instance.ActivateAnnoucer(2);
+        UIManager.instance.ActivateAnnoucer(1);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +30,7 @@ public class ItemObject : MonoBehaviour
         {
             Debug.Log("Item has been picked up.");
             ItemEffect();
-            itemSpawnTimeManager.SetIsSpawned(false); // Reset status of isSpawned
+            itemSpawnConditionManager.SetIsSpawned(false); // Reset status of isSpawned
             Destroy(gameObject);
 
             // Disable item notifier due to item has been picked up
@@ -45,18 +45,18 @@ public class ItemObject : MonoBehaviour
             case 0:
                 //Debug.Log("Health has been increased.");
                 gm.DamagePlayer(-1 * healMount);
-                UIManager.instance.ActivateAnnoucer(3);
+                UIManager.instance.ActivateAnnoucer(2);
                 break;
             case 1:
                 gm.missileAmount += this.missileAmount;
                 //Debug.Log("Missile amount has been increased into " + missileAmount);
                 UIManager.instance.UpdateMissile();
-                UIManager.instance.ActivateAnnoucer(4);
+                UIManager.instance.ActivateAnnoucer(3);
                 break;
             case 2:
                 //Debug.Log("Signal jammmer.");
                 CallRequestCooltimeOnAllSpawners();
-                UIManager.instance.ActivateAnnoucer(5);
+                UIManager.instance.ActivateAnnoucer(4);
                 break;
             case 10:
                 Debug.Log("Achived 1 Rush Item");

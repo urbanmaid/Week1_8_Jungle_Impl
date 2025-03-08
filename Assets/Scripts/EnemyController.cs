@@ -1,29 +1,30 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
     protected GameManager gm;
-    private Rigidbody2D enemyRb;
+    protected Rigidbody2D enemyRb;
     protected GameObject player;
     [SerializeField] bool isShootable = true;
-    [SerializeField] bool isSteerable = true;
+    [SerializeField] protected bool isSteerable = true;
 
     [Header("Enemy Info")]
     public float health;
     public float moveSpeed;
-    private bool inRange;
-    private float angle;
-    private float distance;
-    private Vector2 moveDir;
-    private readonly float availableRange = 26f;
+    protected bool inRange;
+    protected float angle;
+    protected float distance;
+    protected Vector2 moveDir;
+    protected readonly float availableRange = 26f;
 
     [SerializeField] protected float collisionDamage;
 
     [Header("Projectile")]
     [SerializeField] GameObject projectile;
-    private float cooldown;
+    private float fireRateInterval;
     [SerializeField] float fireRate;
     private bool canDamage;
 
@@ -34,13 +35,16 @@ public class EnemyController : MonoBehaviour
     [Header("Score")]
     [SerializeField] protected int enemyScore = 1;
 
-    private ItemSpawnTimeManager itemSpawnTimeManager;
+    private ItemSpawnConditionManager itemSpawnConditionManager;
 
     protected virtual void Start()
     {
         enemyRb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
-        itemSpawnTimeManager = ItemSpawnTimeManager.instance;
+        itemSpawnConditionManager = ItemSpawnConditionManager.instance;
+        if(itemSpawnConditionManager == null){
+            Debug.LogError("ItemSpawnConditionManager is not found.");
+        }
         gm = GameManager.instance;
         canDamage = true;
 
@@ -94,14 +98,16 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void Steer()
+    protected void Steer()
     {
-        moveDir = player.transform.position - transform.position;
+        if(player){
+            moveDir = player.transform.position - transform.position;
+        }
         angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
 
-    private void GetDistance()
+    protected void GetDistance()
     {
         distance = Vector2.Distance(player.transform.position, transform.position);
         inRange = distance < range;
@@ -109,14 +115,14 @@ public class EnemyController : MonoBehaviour
 
     private void DoRepeativeShoot()
     {
-        if (cooldown > 0)
+        if (fireRateInterval > 0)
         {
-            cooldown -= Time.deltaTime;
+            fireRateInterval -= Time.deltaTime;
         }
         else 
         {
             Shoot();
-            cooldown = fireRate;
+            fireRateInterval = fireRate;
         }
     }
 
@@ -133,11 +139,11 @@ public class EnemyController : MonoBehaviour
 
     private void InstantiateItem(Vector3 targetPosition)
     {
-        if (itemSpawnTimeManager.IsAbleToSpawnItem())
+        if (itemSpawnConditionManager.IsAbleToSpawnItem())
         {
             // Spawn one instance of item and disable the ability to spawn item
-            Instantiate(itemSpawnTimeManager.SpawnItem(), targetPosition, Quaternion.identity);
-            itemSpawnTimeManager.SetAbleToSpawnItem(false);
+            Instantiate(itemSpawnConditionManager.SpawnItem(), targetPosition, Quaternion.identity);
+            itemSpawnConditionManager.SetAbleToSpawnItem(false);
         }
     }
 

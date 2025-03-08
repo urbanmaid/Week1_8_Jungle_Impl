@@ -49,14 +49,22 @@ public class LaserBossEnemy : BossEnemy
 
     IEnumerator FireLaser()
     {
-        canFire = false;
+        bossSkillFX.SetActive(true);
+        yield return new WaitForSeconds(bossSkillFXDuration);
+        bossSkillFX.SetActive(false);
+
+       
 
         Vector2 targetPosition = player.transform.position;
         targetDirection = (targetPosition - (Vector2)transform.position).normalized;
         laserDistance = 0f;
 
         // Create laser
-        laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        if(canFire)
+        {
+            laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            canFire = false;
+        }
         laser.transform.localScale = new Vector3(0.5f, 0f, 1f);
 
         // Increase laser

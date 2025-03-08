@@ -15,7 +15,7 @@ public class Projectile : MonoBehaviour
     {
         //rend = GetComponent<SpriteRenderer>();
         theRb = GetComponent<Rigidbody2D>();
-        theRb.linearVelocity = transform.right * projectileSpeed;
+        theRb.linearVelocity = transform.up * projectileSpeed;
         
         Invoke(nameof(OnBecameInvisible), 6f);
     }

@@ -46,7 +46,19 @@ public class GameManager : MonoBehaviour
     internal void AddPhase()
     {
         curPhase++;
-        //UIManager.instance.UpdatePhase();
+        Invoke(nameof(NotifyPhase), 6.0f);
+    }
+
+    internal void NotifyPhase()
+    {
+        UIManager.instance.UpdatePhase();
+
+        if(curPhase == 2){
+            UIManager.instance.ActivateAnnoucer(11);
+        }
+        if(curPhase == 3){
+            UIManager.instance.ActivateAnnoucer(12);
+        }
     }
 
     public void DamagePlayer(float damage)
@@ -63,7 +75,7 @@ public class GameManager : MonoBehaviour
             UIManager.instance.EndGame();
         }
         else if(curHealth < 25){
-            UIManager.instance.ActivateAnnoucer(1);
+            UIManager.instance.ActivateAnnoucer(16);
         }
         else if(curHealth > maxHealth)
         {
@@ -74,19 +86,10 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateHealth();
     }
 
-    private IEnumerator IncreaseScore()
-    {
-        while (isPlaying)
-        {
-            //totalScore++;
-            yield return new WaitForSeconds(1.0f);
-            UIManager.instance.UpdateScore();
-        }
-    }
-
     public void IncreaseScore(int score)
     {
         totalScore += score;
+        ItemSpawnConditionManager.instance.AddScore(score);
         UIManager.instance.UpdateScore();
     }
 }

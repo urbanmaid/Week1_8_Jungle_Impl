@@ -3232,6 +3232,7 @@ MonoBehaviour:
   missileText: {fileID: 458845436}
   scoreText: {fileID: 1663194490}
   timerText: {fileID: 666138434}
+  phaseText: {fileID: 737383416}
   moveLvlText: {fileID: 1190515976}
   attackLvlText: {fileID: 1560224859}
   skillLvlText: {fileID: 1125990269}
@@ -3258,7 +3259,7 @@ MonoBehaviour:
   - {fileID: 1588760075596865886, guid: 6174f6616da1b334b9c342cbaa30cb49, type: 3}
   - {fileID: 6306768681986331493, guid: c8b793224dd0eaa418219a80257a3a4f, type: 3}
   - {fileID: 0}
-  moveLvl: 0
+  missileLvl: 0
   attackLvl: 0
   skillLvl: 0
   scoreCutAmateur: 200
@@ -4682,6 +4683,9 @@ GameObject:
   - component: {fileID: 983784277}
   - component: {fileID: 983784276}
   - component: {fileID: 983784278}
+  - component: {fileID: 983784282}
+  - component: {fileID: 983784281}
+  - component: {fileID: 983784280}
   - component: {fileID: 983784279}
   m_Layer: 0
   m_Name: Enemy Spawn Manager
@@ -4738,11 +4742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 6594762690197060280, guid: 9aace7321d28e7441a38471bf8cf002d, type: 3}
-  - {fileID: 6594762690197060280, guid: 410394346c612eb4cb5511911281d010, type: 3}
-  spawnInterval: 5
-  spawnIntervalCoolTime: 5
-  spawnIntervalMin: 3.5
+  - {fileID: 3036083365682430201, guid: 8c05765ebca1d664abd33c3bdd1280df, type: 3}
+  spawnInterval: 7
+  spawnIntervalCoolTime: 7
+  spawnIntervalMin: 4
   spawnIntervalModScale: -0.1
   distFromPlayerToEnemy: 24
   spawnStartPhase: 1
@@ -4759,14 +4762,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bossList:
+  - {fileID: 2912978008167620341, guid: ec0506089cb22914099963a24fd87289, type: 3}
   - {fileID: 9195407047507399379, guid: 503b111c7b19dec45a5b6a01873ff7bc, type: 3}
   - {fileID: 3873177320849249521, guid: 9d1e3cac46d88074b93cda5525657f5c, type: 3}
-  - {fileID: 2912978008167620341, guid: ec0506089cb22914099963a24fd87289, type: 3}
   isBossSpawned: 0
-  spawnInterval: 30
-  distFromPlayerToEnemy: 30
-  bossLifeInit: 10
+  spawnInterval: 20
+  distFromPlayerToEnemy: 40
+  bossLifeInit: 8
   bossSpawnedCount: 0
+--- !u!114 &983784280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983784275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39849ab8dfbab244e9b8849e6501dc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 6594762690197060280, guid: 9aace7321d28e7441a38471bf8cf002d, type: 3}
+  - {fileID: 6594762690197060280, guid: 410394346c612eb4cb5511911281d010, type: 3}
+  spawnInterval: 12
+  spawnIntervalCoolTime: 12
+  spawnIntervalMin: 8
+  spawnIntervalModScale: -0.1
+  distFromPlayerToEnemy: 24
+  spawnStartPhase: 6
+--- !u!114 &983784281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983784275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39849ab8dfbab244e9b8849e6501dc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 4947638055730923308, guid: c28329226e4a16f41bcb0dc0be94690e, type: 3}
+  spawnInterval: 11
+  spawnIntervalCoolTime: 11
+  spawnIntervalMin: 7
+  spawnIntervalModScale: -0.1
+  distFromPlayerToEnemy: 0
+  spawnStartPhase: 3
+--- !u!114 &983784282
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 983784275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39849ab8dfbab244e9b8849e6501dc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyList:
+  - {fileID: 4947638055730923308, guid: cb195db65e59cd046a6ecf22938549c9, type: 3}
+  spawnInterval: 11
+  spawnIntervalCoolTime: 11
+  spawnIntervalMin: 7
+  spawnIntervalModScale: -0.1
+  distFromPlayerToEnemy: 24
+  spawnStartPhase: 2
 --- !u!1 &990195343
 GameObject:
   m_ObjectHideFlags: 0
@@ -10420,17 +10484,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2035187694}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f469313c800f44a42994abd15abf5b18, type: 3}
+  m_Script: {fileID: 11500000, guid: bff346fbd99feb04ea5f96396cea4f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnIntervalInit: 45
-  spawnInterval: 30
-  isAbleToSpawn: 0
-  isSpawned: 0
   itemList:
   - {fileID: 572938174624973367, guid: 65b3036f11b92c74c8b7d3fbfcf63075, type: 3}
   - {fileID: 236536555064978548, guid: 0364fa43efaaa6c47bef52284287ee4e, type: 3}
   - {fileID: 6822038983473570202, guid: ecbf829b7806d7145ac1301dc20d0deb, type: 3}
+  isAbleToSpawn: 0
+  isSpawned: 0
+  itemSpawnedAmount: 0
+  scoreCurrent: 0
+  scoreInterval: 30
+  scoreIntervalAddition: 5
 --- !u!4 &2035187696
 Transform:
   m_ObjectHideFlags: 0
@@ -10804,6 +10870,22 @@ PrefabInstance:
     - target: {fileID: 4410003312839610459, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Name
       value: PlayerSprite
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,9 +7,11 @@ using UnityEngine.Serialization;
 public class BossEnemy : EnemyController
 {
     [Header("Boss Enemy")]
-    public float bossMoveSpeed = 1;
     private float initHealth = 0;
     private readonly float initHealthAnnounceCriterion = 50;
+    [SerializeField] protected GameObject bossSkillFX;
+    protected float bossSkillFXDuration = 1.0f;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected override void Start()
@@ -31,7 +33,7 @@ public class BossEnemy : EnemyController
             var angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
             transform.position =
-                Vector2.MoveTowards(transform.position, player.transform.position, bossMoveSpeed * Time.deltaTime);
+                Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
         // Move toward player
 
@@ -48,16 +50,14 @@ public class BossEnemy : EnemyController
             GameManager.instance.bossSpawnManager.enableBossSpawn();
             GameManager.instance.IncreaseScore(enemyScore);
 
-            GameManager.instance.AddPhase();
-
             UIManager.instance.Upgrade();
-            UIManager.instance.ActivateAnnoucer(13);
+            UIManager.instance.ActivateAnnoucer(18);
 
             gm.player.GetComponent<PlayerInterfaceController>().SetBossNotifier(false);
         }
         else if ((health <= 20) && (initHealth > initHealthAnnounceCriterion))
         {
-            UIManager.instance.ActivateAnnoucer(12);
+            UIManager.instance.ActivateAnnoucer(17);
         }
 
         if (!GameManager.instance.isPlaying)
@@ -71,11 +71,13 @@ public class BossEnemy : EnemyController
         }
 
         // Move toward player
+        /*
         Vector2 targetDir = (player.transform.position - transform.position).normalized;
         var angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
         transform.position =
-            Vector2.MoveTowards(transform.position, player.transform.position, bossMoveSpeed * Time.deltaTime);
+            Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+        */
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

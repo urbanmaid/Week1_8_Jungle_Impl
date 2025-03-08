@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.4958834, b: 0.7398108, a: 1}
+  m_Color: {r: 1, g: 0.14901961, b: 0.56078434, a: 0.3647059}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18f72c09c9667ca4fbb2a5ea91cfda7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserDamage: 1
+  laserDamage: 10
 --- !u!61 &769922181454938848
 BoxCollider2D:
   m_ObjectHideFlags: 0
