@@ -45,7 +45,7 @@ public class UIManager : MonoBehaviour
     private int sec;
 
     [Header("Score Evaluation")]
-    [SerializeField] float scoreInterval = 1f;
+    //[SerializeField] float scoreInterval = 1f;
     [SerializeField] int scoreCutAmateur = 250;
     [SerializeField] int scoreCutIntermediate = 500;
     [SerializeField] int scoreCutPro = 1000;

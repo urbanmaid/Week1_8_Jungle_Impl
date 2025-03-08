@@ -6,14 +6,14 @@ public class Projectile : MonoBehaviour
 {
     private Rigidbody2D theRb;
     public float projectileSpeed;
-    private SpriteRenderer rend;
+    //private SpriteRenderer rend;
     public float damage;
     
     [SerializeField] private GameObject projectileParticle;
 
-    void Start()
+    protected virtual void Start()
     {
-        rend = GetComponent<SpriteRenderer>();
+        //rend = GetComponent<SpriteRenderer>();
         theRb = GetComponent<Rigidbody2D>();
         theRb.linearVelocity = transform.right * projectileSpeed;
         

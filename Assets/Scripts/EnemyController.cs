@@ -13,32 +13,28 @@ public class EnemyController : MonoBehaviour
     [Header("Enemy Info")]
     public float health;
     public float moveSpeed;
-    public bool inRange;
-    [SerializeField] float angle;
-    [SerializeField] float distance;
+    private bool inRange;
+    private float angle;
+    private float distance;
     private Vector2 moveDir;
+    private readonly float availableRange = 26f;
 
     [SerializeField] protected float collisionDamage;
+
+    [Header("Projectile")]
     [SerializeField] GameObject projectile;
     private float cooldown;
-    public float fireRate;
+    [SerializeField] float fireRate;
     private bool canDamage;
 
     [SerializeField] float range;
-    private readonly float availableRange = 26f;
+    [SerializeField] bool isShootingBeforeRange;
 
+
+    [Header("Score")]
     [SerializeField] protected int enemyScore = 1;
 
-    // [Header("Projectile Info")]
-    // public float damage;
-    // public float projectileSpeed;
-    
-    
-    // public float scale;
-    // public Color projectileColor;
-
-    [Header("Item")]
-    [SerializeField] ItemSpawnTimeManager itemSpawnTimeManager;
+    private ItemSpawnTimeManager itemSpawnTimeManager;
 
     protected virtual void Start()
     {
@@ -54,6 +50,7 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
+        // Check if game is playing
         if (gm.isPlaying)
         {
             //Enemy movement and rotation
@@ -61,32 +58,30 @@ public class EnemyController : MonoBehaviour
             {
                 Steer();
             }
-            distance = Vector2.Distance(player.transform.position, transform.position);
-            inRange = distance < range;
+            GetDistance();
+
+            // Shoot Control
             if (isShootable)
             {
-                if (!inRange)
+                if (!inRange) // enemy will move towards player if player is out of range
                 {
                     enemyRb.linearVelocity = moveDir.normalized * moveSpeed;
+                    if (isShootingBeforeRange)
+                    {
+                        DoRepeativeShoot();
+                    }
                 }
-                else
+                else // enemy will stop moving and shoot player if player is in range
                 {
                     enemyRb.linearVelocity = Vector2.zero;
-                    if (cooldown > 0)
-                    {
-                        cooldown -= Time.deltaTime;
-                    }
-                    else 
-                    {
-                        Shoot();
-                        cooldown = fireRate;
-                    }
+                    DoRepeativeShoot();
                 }
             }
             else {
                 enemyRb.linearVelocity = moveDir.normalized * moveSpeed;
             }
 
+            // Destroy enemy if it is out of available range
             if(distance > availableRange)
             {
                 Destroy(gameObject);
@@ -97,7 +92,6 @@ public class EnemyController : MonoBehaviour
         {
             enemyRb.linearVelocity = Vector2.zero;
         }
-
     }
 
     private void Steer()
@@ -105,6 +99,25 @@ public class EnemyController : MonoBehaviour
         moveDir = player.transform.position - transform.position;
         angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
+    private void GetDistance()
+    {
+        distance = Vector2.Distance(player.transform.position, transform.position);
+        inRange = distance < range;
+    }
+
+    private void DoRepeativeShoot()
+    {
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
+        else 
+        {
+            Shoot();
+            cooldown = fireRate;
+        }
     }
 
     public virtual void Damage(float dmgAmount)
@@ -132,7 +145,7 @@ public class EnemyController : MonoBehaviour
     //used object pooling for projectile spawning and despawning
     private void Shoot()
     {
-        Instantiate(projectile,transform.position, transform.rotation);        
+        Instantiate(projectile, transform.position, transform.rotation);        
     }
 
    protected virtual void OnTriggerEnter2D(Collider2D collision)

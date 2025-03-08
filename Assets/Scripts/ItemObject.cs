@@ -3,14 +3,8 @@ using UnityEngine;
 public class ItemObject : MonoBehaviour
 {
     public int itemCode;
-    /* 
-    Item Code: 
-    0 for Heal
-    1 for Missile
-    2 for Skill Usage
-    */
 
-    private float rotSpeed = 8f;
+    //private float rotSpeed = 8f;
     private GameManager gm;
     private ItemSpawnTimeManager itemSpawnTimeManager;
     private PlayerController playerController;
@@ -85,6 +79,11 @@ public class ItemObject : MonoBehaviour
                 Debug.LogError("Invalid item code detected, no effect applied.");
                 break;
         }
+    }
+
+    private void CallRequestCooltimeOnAllSpawners()
+    {
+        
     }
 
     public void UseSkill()

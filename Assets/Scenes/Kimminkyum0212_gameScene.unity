@@ -3261,7 +3261,6 @@ MonoBehaviour:
   moveLvl: 0
   attackLvl: 0
   skillLvl: 0
-  scoreInterval: 1
   scoreCutAmateur: 200
   scoreCutIntermediate: 500
   scoreCutPro: 1000
@@ -4707,7 +4706,7 @@ MonoBehaviour:
   - {fileID: 6594762690197060280, guid: ae3bfe83c7c508d40a43a19dcaa4a789, type: 3}
   spawnInterval: 2.5
   spawnIntervalCoolTime: 2
-  spawnIntervalMin: 0.8
+  spawnIntervalMin: 0.9
   spawnIntervalModScale: -0.05
   distFromPlayerToEnemy: 24
   spawnStartPhase: 0
@@ -4739,10 +4738,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyList:
-  - {fileID: 6594762690197060280, guid: 6ca5580b06bbf9b4c9b063b6351751e3, type: 3}
+  - {fileID: 6594762690197060280, guid: 9aace7321d28e7441a38471bf8cf002d, type: 3}
+  - {fileID: 6594762690197060280, guid: 410394346c612eb4cb5511911281d010, type: 3}
   spawnInterval: 5
   spawnIntervalCoolTime: 5
-  spawnIntervalMin: 2.5
+  spawnIntervalMin: 3.5
   spawnIntervalModScale: -0.1
   distFromPlayerToEnemy: 24
   spawnStartPhase: 1
