@@ -23,7 +23,7 @@ public class BossSpawner : MonoBehaviour
     [Header("Difficulty Control")]
     [SerializeField] float bossLifeInit = 10;
     private float bossLifeCurrent;
-    [SerializeField] int bossSpawnedCount = 0;
+    public int bossSpawnedCount = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

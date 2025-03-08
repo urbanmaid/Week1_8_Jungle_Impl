@@ -58,7 +58,7 @@ MonoBehaviour:
   projectile: {fileID: 0}
   fireRate: 0
   range: 7.5
-  enemyScore: 1
+  enemyScore: 2
   itemSpawnTimeManager: {fileID: 0}
 --- !u!58 &7384792227603043670
 CircleCollider2D:

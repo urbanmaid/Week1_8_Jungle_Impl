@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public float maxHealth;
     public float curHealth;
+    public int curPhase;
     public bool isPlaying;
     public int missileAmount;
     
@@ -38,8 +39,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         curHealth = maxHealth;
-        
+        curPhase = 0;
         //missileAmount = 0;
+    }
+
+    internal void AddPhase()
+    {
+        curPhase++;
+        //UIManager.instance.UpdatePhase();
     }
 
     public void DamagePlayer(float damage)

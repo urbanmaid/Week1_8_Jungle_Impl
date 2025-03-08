@@ -12,6 +12,7 @@ public class RandomEnemySpawner : MonoBehaviour
     private GameObject player;
     internal PlayerController pc;
     private GameManager gm;
+    private BossSpawner bs;
 
     [Header("Timing Control")]
     private float timeSinceLastSpawn;
@@ -23,12 +24,16 @@ public class RandomEnemySpawner : MonoBehaviour
     [Header("Dist Control")]
     [SerializeField] float distFromPlayerToEnemy = 18f;
 
+    [Header("Condition Control")]
+    [SerializeField] int spawnStartPhase = 0; // n means after n tries of spawning boss it starts working 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         pc = player.GetComponent<PlayerController>();
         gm = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        bs = gameObject.GetComponent<BossSpawner>(); //Finds the BossSpawner script attached to the same GameObject
 
         instance = this;
     }
@@ -41,7 +46,7 @@ public class RandomEnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(true){
+        if(spawnStartPhase <= gm.curPhase){
             timeSinceLastSpawn += Time.deltaTime;
             if (timeSinceLastSpawn >= spawnInterval)
             {

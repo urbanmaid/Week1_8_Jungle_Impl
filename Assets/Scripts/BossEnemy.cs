@@ -42,9 +42,14 @@ public class BossEnemy : EnemyController
         health -= dmgAmount;
         if (health <= 0)
         {
-            GameManager.instance.bossSpawnManager.enableBossSpawn();
             Destroy(gameObject);
+
+            //interaction with game manager
+            GameManager.instance.bossSpawnManager.enableBossSpawn();
             GameManager.instance.IncreaseScore(enemyScore);
+
+            GameManager.instance.AddPhase();
+
             UIManager.instance.Upgrade();
             UIManager.instance.ActivateAnnoucer(13);
 
