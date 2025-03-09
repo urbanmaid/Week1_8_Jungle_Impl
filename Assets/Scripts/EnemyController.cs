@@ -26,7 +26,6 @@ public class EnemyController : MonoBehaviour
     [SerializeField] GameObject projectile;
     private float fireRateInterval;
     [SerializeField] float fireRate;
-    private bool canDamage;
 
     [SerializeField] float range;
     [SerializeField] bool isShootingBeforeRange;
@@ -46,7 +45,6 @@ public class EnemyController : MonoBehaviour
             Debug.LogError("ItemSpawnConditionManager is not found.");
         }
         gm = GameManager.instance;
-        canDamage = true;
 
         // For someone which is not steerable
         Steer();
@@ -156,17 +154,14 @@ public class EnemyController : MonoBehaviour
 
    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") && canDamage && !player.GetComponent<PlayerController>().isShielded){
-            canDamage = false;
+        if(collision.CompareTag("Player") 
+        && !player.GetComponent<PlayerController>().isShielded
+        && !player.GetComponent<PlayerController>().isRushing)
+        // Player should not be in shield or rushing status for damaging
+        {
             gm.DamagePlayer(collisionDamage);
-            //StartCoroutine("WaitCo");
             Destroy(gameObject);
         }
-    }
-
-    IEnumerator WaitCo(){
-        yield return new WaitForSeconds(1f);
-        canDamage = true;
     }
 }
 

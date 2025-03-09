@@ -17,7 +17,9 @@ public class StatusAnnouncer : MonoBehaviour
 
     // Update is called once per frame
     public void ActivateAnnoucer(int code){
-        statusAnnouncerUI.text = statusText[code];
+        if(statusText != null){
+            statusAnnouncerUI.text = statusText[code];
+        }
         Invoke(nameof(ResetAnnoucer), annouceDuration);
     }
 

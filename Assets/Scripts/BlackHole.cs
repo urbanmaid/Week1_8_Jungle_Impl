@@ -2,10 +2,20 @@ using UnityEngine;
 
 public class BlackHole : MonoBehaviour
 {
+    [SerializeField] CircleCollider2D rangeCollider;
+    [SerializeField] PointEffector2D effector2D;
+
+    [Header("Player Blackhole Param")]
+    [SerializeField] float effectorForceInit = -280;
+    [SerializeField] float effectorScaleInit = 6;
+    [SerializeField] float effectorForceInterval = -40;
+    [SerializeField] float effectorScaleInterval = 2;
+
+    [SerializeField] private string AffectedObjectTag = "Player";
     private void OnTriggerEnter2D(Collider2D other)
     {
         // "Player" 태그를 가진 객체가 들어오면
-        if (other.CompareTag("Player"))
+        if ((AffectedObjectTag == "Player") && other.CompareTag(AffectedObjectTag))
         {
             UIManager.instance.ActivateAnnoucer(15);
         }
@@ -14,7 +24,8 @@ public class BlackHole : MonoBehaviour
     private void OnTriggerExit2D(Collider2D other)
     {
         // "Player" 태그를 가진 객체가 나가면
-        if (other.CompareTag("Player"))
+        
+        if ((AffectedObjectTag == "Player") && other.CompareTag(AffectedObjectTag))
         {
             Rigidbody2D rb = other.GetComponent<Rigidbody2D>();
             if (rb != null)
@@ -24,5 +35,14 @@ public class BlackHole : MonoBehaviour
                 rb.angularVelocity = 0f;
             }
         }
+    }
+
+    internal void SetGravityPower(int power){
+        effector2D.forceMagnitude = effectorForceInit + (power * effectorForceInterval);
+        rangeCollider.radius = effectorScaleInit + (power * effectorScaleInterval);
+
+        Debug.Log("Blackhole power " + power
+         + ", Magnitude: " + effector2D.forceMagnitude
+         + ", Radius: " + rangeCollider.radius);
     }
 }

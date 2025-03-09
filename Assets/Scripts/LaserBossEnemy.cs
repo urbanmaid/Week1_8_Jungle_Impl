@@ -7,15 +7,15 @@ public class LaserBossEnemy : BossEnemy
     [SerializeField] private GameObject laserPrefab;
     private GameObject laser;
 
-    [SerializeField] private float growSpeed = 3.0f;
-    [SerializeField] private float laserDuration = 1.5f;
-    [SerializeField] private float maxLaserDistance = 20f;
+    [SerializeField] private float laserFiringSpeed = 1.8f;
+    [SerializeField] private float laserDuration = 2.5f;
+    [SerializeField] private float laserReachDistance = 35f;
 
     private Vector2 targetDirection;
     private float laserDistance;
 
-    [SerializeField] private float laserRate = 3f;
-    [SerializeField] private float laserRange = 8f;
+    [SerializeField] private float laserPrepDuration = 1f;
+    [SerializeField] private float firingDetectingRange = 12.5f;
     private bool canFire = true;
 
     protected override void Start()
@@ -35,7 +35,7 @@ public class LaserBossEnemy : BossEnemy
         if (canFire && player != null)
         {
             var distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance <= laserRange)
+            if (distance <= firingDetectingRange)
             {
                 StartCoroutine(FireLaser());
             }
@@ -71,8 +71,8 @@ public class LaserBossEnemy : BossEnemy
         float elapsed = 0f;
         while (elapsed < 1f)
         {
-            elapsed += Time.deltaTime * growSpeed;
-            laserDistance = Mathf.Lerp(0, maxLaserDistance, elapsed);
+            elapsed += Time.deltaTime * laserFiringSpeed;
+            laserDistance = Mathf.Lerp(0, laserReachDistance, elapsed);
             UpdateLaserTransform();
             yield return null;
         }
@@ -83,8 +83,8 @@ public class LaserBossEnemy : BossEnemy
         elapsed = 0f;
         while (elapsed < 1f)
         {
-            elapsed += Time.deltaTime * growSpeed;
-            laserDistance = Mathf.Lerp(maxLaserDistance, 0, elapsed);
+            elapsed += Time.deltaTime * laserFiringSpeed;
+            laserDistance = Mathf.Lerp(laserReachDistance, 0, elapsed);
             UpdateLaserTransform();
             yield return null;
         }
@@ -93,7 +93,7 @@ public class LaserBossEnemy : BossEnemy
         Destroy(laser);
         laser = null;
 
-        yield return new WaitForSeconds(laserRate);
+        yield return new WaitForSeconds(laserPrepDuration);
         canFire = true;
     }
 

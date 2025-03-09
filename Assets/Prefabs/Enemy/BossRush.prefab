@@ -139,7 +139,7 @@ MonoBehaviour:
   isShootable: 0
   isSteerable: 1
   health: 10
-  moveSpeed: 4
+  moveSpeed: 5
   collisionDamage: 40
   projectile: {fileID: 0}
   fireRate: 0

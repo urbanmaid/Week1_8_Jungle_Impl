@@ -83,7 +83,13 @@ public class BossEnemy : EnemyController
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")){
-            gm.DamagePlayer(collisionDamage);
+            if(collision.GetComponent<PlayerController>().isRushing){
+                gm.DamagePlayer(collisionDamage / 4f);
+            }
+            else
+            {
+                gm.DamagePlayer(collisionDamage);
+            }
             //StartCoroutine("WaitCo");            
         }
     }

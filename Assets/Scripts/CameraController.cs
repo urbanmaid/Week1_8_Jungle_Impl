@@ -8,7 +8,6 @@ public class CameraController : MonoBehaviour
     public bool inDamange;
     private Vector3 damangeFXPosition;
 
-
     void Start()
     {
         // Assign player transform
@@ -16,7 +15,6 @@ public class CameraController : MonoBehaviour
 
         transform.position = new Vector3(player.position.x, player.position.y, -10);
     }
-
 
     void Update()
     {
@@ -31,7 +29,7 @@ public class CameraController : MonoBehaviour
     }
 
     float MakeDamageFXMagnitude(){
-        return Random.Range(-0.25f, 0.25f);
+        return Random.Range(-0.2f, 0.2f);
     }
 
     // Is only called when player got damage in positive value(damaging)
@@ -43,5 +41,9 @@ public class CameraController : MonoBehaviour
     private void StopShake()
     {
         inDamange = false;
+    }
+
+    internal void ToggleShake(bool value){
+        inDamange = value;
     }
 }

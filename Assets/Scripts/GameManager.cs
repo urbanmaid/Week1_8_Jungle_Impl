@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Game Manager Assists")]
     public static GameManager instance;
     public RandomEnemySpawner spawnManager;
     [SerializeField] private CameraController cameraController;
     public BossSpawner bossSpawnManager;
 
     
-    [Header("Game Mechanic")]
+    [Header("Player Stat")]
     public GameObject player;
     public float maxHealth;
     public float curHealth;
     public int curPhase;
     public bool isPlaying;
     public int missileAmount;
+
+    public int skillRush = 1;
+    public int skillShield = 1;
+    public int skillGravityShot = 1;
     
     public GameObject managers;
 
@@ -46,6 +51,9 @@ public class GameManager : MonoBehaviour
 
         // Initialize the game UI with the current value of player
         UIManager.instance.UpdateMissile();
+        UIManager.instance.UpdateRush();
+        UIManager.instance.UpdateShield();
+        UIManager.instance.UpdateGravityShot();
     }
 
     internal void AddPhase()
@@ -91,6 +99,60 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateHealth();
     }
 
+    // Skill Management
+    internal void NotifyMissileUsed()
+    {
+        missileAmount--;
+        UIManager.instance.UpdateMissile();
+    }
+
+    internal void AddSkillRush(int count)
+    {
+        skillRush += count;
+        UIManager.instance.UpdateRush();
+    }
+
+    internal void AddSkillShield(int count)
+    {
+        skillShield += count;
+        UIManager.instance.UpdateShield();
+    }
+
+    internal void AddSkillGravityShot(int count)
+    {
+        skillGravityShot += count;
+        UIManager.instance.UpdateGravityShot();
+    }
+
+    internal void UseSkillRush()
+    {
+        if(skillRush > 0){
+            skillRush--;
+            UIManager.instance.UpdateRush();
+        }
+    }
+
+    internal void UseSkillShield()
+    {
+        if(skillShield > 0){
+            skillShield--;
+            UIManager.instance.UpdateShield();
+        }
+    }
+
+    internal void UseSkillGravityShot()
+    {
+        if(skillGravityShot > 0){
+            skillGravityShot--;
+            UIManager.instance.UpdateGravityShot();
+        }
+    }
+
+    internal void ToggleShakeCamera(bool value)
+    {
+        cameraController.ToggleShake(value);
+    }
+
     public void IncreaseScore(int score)
     {
         scoreTotal += score;
@@ -104,9 +166,5 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateScore();
     }
 
-    internal void NotifyMissileUsed()
-    {
-        missileAmount--;
-        UIManager.instance.UpdateMissile();
-    }
+
 }

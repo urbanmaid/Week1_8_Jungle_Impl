@@ -11,7 +11,7 @@ public class ItemObject : MonoBehaviour
     private PlayerInterfaceController playerInterfaceController;
 
     [SerializeField] float healMount = 10f;
-    [SerializeField] int missileAmount = 8;
+    [SerializeField] int buffAmount = 4;
 
     private void Start()
     {
@@ -30,7 +30,10 @@ public class ItemObject : MonoBehaviour
         {
             Debug.Log("Item has been picked up.");
             ItemEffect();
-            itemSpawnConditionManager.SetIsSpawned(false); // Reset status of isSpawned
+            
+            if(itemSpawnConditionManager){
+                itemSpawnConditionManager.SetIsSpawned(false); // Reset status of isSpawned
+            }
             Destroy(gameObject);
 
             // Disable item notifier due to item has been picked up
@@ -42,30 +45,33 @@ public class ItemObject : MonoBehaviour
     {
         switch (itemCode)
         {
-            case 0:
+            case 0: // Activate when touched
                 //Debug.Log("Health has been increased.");
                 gm.DamagePlayer(-1 * healMount);
-                UIManager.instance.ActivateAnnoucer(2);
+                UIManager.instance.ActivateAnnoucer(buffAmount);
                 break;
             case 1:
-                gm.missileAmount += this.missileAmount;
+                gm.missileAmount += this.buffAmount;
                 //Debug.Log("Missile amount has been increased into " + missileAmount);
                 UIManager.instance.UpdateMissile();
-                UIManager.instance.ActivateAnnoucer(3);
+                UIManager.instance.ActivateAnnoucer(buffAmount);
                 break;
             case 2:
                 //Debug.Log("Signal jammmer.");
                 CallRequestCooltimeOnAllSpawners();
-                UIManager.instance.ActivateAnnoucer(4);
+                UIManager.instance.ActivateAnnoucer(buffAmount);
                 break;
-            case 10:
+            case 10: // Not activated by touching but stored
                 Debug.Log("Achived 1 Rush Item");
+                gm.AddSkillRush(2);
                 break;
             case 11:
-                Debug.Log("Achived 1 Blackhole Item");
+                Debug.Log("Achived 1 Shield Item");
+                gm.AddSkillShield(2);
                 break;
             case 12:
-                Debug.Log("Achived 1 Shield Item");
+                Debug.Log("Achived 1 GravityShot/Blackhole Item");
+                gm.AddSkillGravityShot(2);
                 break;
             default:
                 Debug.LogError("Invalid item code detected, no effect applied.");
@@ -78,34 +84,6 @@ public class ItemObject : MonoBehaviour
         foreach (RandomEnemySpawner spawner in RandomEnemySpawner.instances)
         {
             spawner.RequestCooltime();
-        }
-    }
-
-    public void UseSkill()
-    {
-        // Skill usage
-        int skillMode = Random.Range(0, 3);
-       
-        // Use skill based on skillMode
-        switch (skillMode)
-        {
-            case 0:
-                Debug.Log("Gravity Shot has been used.");
-                playerController.FXGravityShot();
-                break;
-            case 1:
-                // Shield
-                Debug.Log("Shield has been used.");
-                playerController.FXShield();
-                break;
-            case 2:
-                // Charge
-                Debug.Log("Charge has been used.");
-                playerController.FXRush();
-                break;
-            default:
-                Debug.LogError("Invalid skill mode detected, no effect applied.");
-                break;
         }
     }
 }

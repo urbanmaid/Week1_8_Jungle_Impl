@@ -147,11 +147,11 @@ MonoBehaviour:
   enemyScore: 25
   bossSkillFX: {fileID: 3256157676802918113}
   laserPrefab: {fileID: 5702909733206541825, guid: aa85fe4968c861d40ad286ef2f223a67, type: 3}
-  growSpeed: 3
+  laserFiringSpeed: 1.4
   laserDuration: 2
-  maxLaserDistance: 40
-  laserRate: 3
-  laserRange: 8
+  laserReachDistance: 60
+  laserPrepDuration: 1
+  firingDetectingRange: 15
 --- !u!58 &8154773617652697862
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,7 +234,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Time: 1.25
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0.6
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     private GameManager gm;
     [SerializeField] TextMeshProUGUI healthText, missileText, scoreText, timerText, phaseText;
     [SerializeField] TextMeshProUGUI moveLvlText, attackLvlText, skillLvlText;
+    [SerializeField] TextMeshProUGUI skillRushText, skillShieldText, skillGravityShotText;
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
     [SerializeField] TextMeshProUGUI upgradeConfirmText;
@@ -22,7 +23,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject endPanel;
     [SerializeField] GameObject gameInfo; 
-    [SerializeField] GameObject instructionPanel;
     
     [Header("Instruction")]
     [SerializeField] TextMeshProUGUI instructionText;
@@ -87,13 +87,11 @@ public class UIManager : MonoBehaviour
     {
         scoreText.text = gm.scoreTotal + " / " + gm.scoreTotalTarget;
     }
-
     public void UpdateHealth()
     {
         healthSlider.value = gm.curHealth;
         healthText.text = gm.curHealth.ToString();
     }
-
     public void UpdateMissile()
     {
         missileText.text = "" + gm.missileAmount;
@@ -102,6 +100,19 @@ public class UIManager : MonoBehaviour
     public void UpdatePhase()
     {
         phaseText.text = "" + gm.curPhase;
+    }
+
+    public void UpdateRush()
+    {
+        skillRushText.text = "" + gm.skillRush;
+    }
+    public void UpdateShield()
+    {
+        skillShieldText.text = "" + gm.skillShield;
+    }
+    public void UpdateGravityShot()
+    {
+        skillGravityShotText.text = "" + gm.skillGravityShot;
     }
 
     void UpdateTimer()
@@ -119,7 +130,7 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         startPanel.SetActive(false);
-        instructionPanel.SetActive(false);
+        //instructionPanel.SetActive(false);
 
         gm.isPlaying = true;
         gm.player.SetActive(true);
@@ -233,6 +244,7 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    /*
     public void ShowInstruction()
     {
         startPanel.SetActive(false);
@@ -288,4 +300,5 @@ public class UIManager : MonoBehaviour
         instructionPanel.SetActive(false);
         startPanel.SetActive(true);
     }
+    */
 }
