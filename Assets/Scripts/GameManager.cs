@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,7 +21,8 @@ public class GameManager : MonoBehaviour
     
     public GameObject managers;
 
-    [HideInInspector] public int totalScore = 0;
+    [HideInInspector] public int scoreTotal = 0;
+    internal int scoreTotalTarget = 0;
     
     private void Awake()
     {
@@ -41,6 +43,9 @@ public class GameManager : MonoBehaviour
         curHealth = maxHealth;
         curPhase = 0;
         //missileAmount = 0;
+
+        // Initialize the game UI with the current value of player
+        UIManager.instance.UpdateMissile();
     }
 
     internal void AddPhase()
@@ -88,8 +93,20 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int score)
     {
-        totalScore += score;
+        scoreTotal += score;
         ItemSpawnConditionManager.instance.AddScore(score);
         UIManager.instance.UpdateScore();
+    }
+
+    internal void UpdateScoreTarget(int scoreTarget)
+    {
+        scoreTotalTarget = scoreTarget + scoreTotal;
+        UIManager.instance.UpdateScore();
+    }
+
+    internal void NotifyMissileUsed()
+    {
+        missileAmount--;
+        UIManager.instance.UpdateMissile();
     }
 }

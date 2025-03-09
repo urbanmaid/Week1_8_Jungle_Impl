@@ -91,17 +91,17 @@ public class ItemObject : MonoBehaviour
         {
             case 0:
                 Debug.Log("Gravity Shot has been used.");
-                playerController.GravityShot();
+                playerController.FXGravityShot();
                 break;
             case 1:
                 // Shield
                 Debug.Log("Shield has been used.");
-                playerController.Shield();
+                playerController.FXShield();
                 break;
             case 2:
                 // Charge
                 Debug.Log("Charge has been used.");
-                playerController.Charge();
+                playerController.FXRush();
                 break;
             default:
                 Debug.LogError("Invalid skill mode detected, no effect applied.");

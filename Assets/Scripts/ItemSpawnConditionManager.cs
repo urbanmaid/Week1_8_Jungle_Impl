@@ -13,7 +13,7 @@ public class ItemSpawnConditionManager : MonoBehaviour
 
     [Header("Timing")]
     [SerializeField] int scoreCurrent = 0;
-    [SerializeField] int scoreInterval = 30;
+    [SerializeField] int scoreTarget = 30;
     private int scoreIntervalInit = 0;
     [SerializeField] int scoreIntervalAddition = 5;
 
@@ -23,18 +23,24 @@ public class ItemSpawnConditionManager : MonoBehaviour
         instance = this;
 
         scoreCurrent = 0;
-        scoreIntervalInit = scoreInterval;
+        scoreIntervalInit = scoreTarget;
+        NotifyNextscoreTarget();
     }
 
     internal void AddScore(int score){
         scoreCurrent += score;
-        if(scoreCurrent >= scoreInterval){
+
+        while (scoreCurrent >= scoreTarget)
+        {
             itemSpawnedAmount++;
-            scoreCurrent = 0;
-            scoreInterval += scoreIntervalAddition * itemSpawnedAmount;
+            int scoreOver = scoreCurrent - scoreTarget;
+            scoreCurrent = scoreOver;
+            scoreTarget += scoreIntervalAddition * 1;
+
+            NotifyNextscoreTargetWithGrant(scoreOver);
 
             SetAbleToSpawnItem(true);
-            Debug.Log("Item is able to spawn.");
+            Debug.Log("Next target score: " + scoreTarget);
         }
     }
 
@@ -51,8 +57,19 @@ public class ItemSpawnConditionManager : MonoBehaviour
     }
 
     public GameObject SpawnItem(){
+        //NotifyNextscoreTarget();
+
         isSpawned = true;
         return itemList[Random.Range(0, itemList.Count)];
+    }
+
+    void NotifyNextscoreTarget(){
+        GameManager.instance.UpdateScoreTarget(scoreTarget);
+    }
+
+    void NotifyNextscoreTargetWithGrant(int scoreOver)
+    {
+        GameManager.instance.UpdateScoreTarget(scoreTarget - scoreOver);
     }
 
 }

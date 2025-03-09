@@ -57,7 +57,7 @@ MonoBehaviour:
   fireRate: 0
   range: 0
   isShootingBeforeRange: 0
-  enemyScore: 50
+  enemyScore: 25
   bossSkillFX: {fileID: 0}
   pointEffector: {fileID: 0}
 --- !u!58 &7547337827093729739

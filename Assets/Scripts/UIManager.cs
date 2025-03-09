@@ -85,7 +85,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     public void UpdateScore()
     {
-        scoreText.text = gm.totalScore.ToString();
+        scoreText.text = gm.scoreTotal + " / " + gm.scoreTotalTarget;
     }
 
     public void UpdateHealth()
@@ -164,7 +164,7 @@ public class UIManager : MonoBehaviour
         {
             case 0:
                 //upgrade missile spec
-                gm.player.GetComponent<PlayerController>().moveSpeed *= 1.5f;
+                gm.player.GetComponent<PlayerController>().missilePower++;
                 missileLvl += 1;
                 moveLvlText.text = "Lv. " + missileLvl;
                 break;
@@ -176,7 +176,7 @@ public class UIManager : MonoBehaviour
                 break;
             case 2:
                 //upgrade skill power
-                gm.player.GetComponent<PlayerController>().skillPower *= 1.5f;
+                gm.player.GetComponent<PlayerController>().skillPower++;
                 skillLvl += 1;
                 skillLvlText.text = "Lv. " + skillLvl;
                 break;
@@ -199,20 +199,20 @@ public class UIManager : MonoBehaviour
         gm.isPlaying = false;
         EvaulateScore();
         endPanel.SetActive(true);
-        scoreTextGameOver.text = "" + gm.totalScore;
+        scoreTextGameOver.text = "" + gm.scoreTotal;
     }
 
     private void EvaulateScore()
     {
-        if (gm.totalScore < scoreCutAmateur)
+        if (gm.scoreTotal < scoreCutAmateur)
         {
             gameoverEvalText.text = quoteRookie;
         }
-        else if (gm.totalScore < scoreCutIntermediate)
+        else if (gm.scoreTotal < scoreCutIntermediate)
         {
             gameoverEvalText.text = quoteAmateur;
         }
-        else if (gm.totalScore < scoreCutPro)
+        else if (gm.scoreTotal < scoreCutPro)
         {
             gameoverEvalText.text = quoteIntermediate;
         }

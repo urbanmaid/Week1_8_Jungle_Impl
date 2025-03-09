@@ -144,12 +144,12 @@ MonoBehaviour:
   fireRate: 3
   range: 20
   isShootingBeforeRange: 0
-  enemyScore: 50
+  enemyScore: 25
   bossSkillFX: {fileID: 3256157676802918113}
   laserPrefab: {fileID: 5702909733206541825, guid: aa85fe4968c861d40ad286ef2f223a67, type: 3}
   growSpeed: 3
   laserDuration: 2
-  maxLaserDistance: 80
+  maxLaserDistance: 40
   laserRate: 3
   laserRange: 8
 --- !u!58 &8154773617652697862

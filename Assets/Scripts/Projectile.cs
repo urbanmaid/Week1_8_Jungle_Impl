@@ -4,18 +4,22 @@ using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
-    private Rigidbody2D theRb;
-    public float projectileSpeed;
+    private Rigidbody2D rb;
+    [SerializeField] float projectileSpeed;
     //private SpriteRenderer rend;
-    public float damage;
+    [SerializeField] float damage;
     
     [SerializeField] private GameObject projectileParticle;
 
     protected virtual void Start()
     {
-        //rend = GetComponent<SpriteRenderer>();
-        theRb = GetComponent<Rigidbody2D>();
-        theRb.linearVelocity = transform.up * projectileSpeed;
+        if(gameObject.CompareTag("Missile Projectile")){
+            damage = damage + GameObject.Find("Player").GetComponent<PlayerController>().missilePower * 2;
+            Debug.Log("Missile Damage: " + damage);
+        }
+
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = transform.up * projectileSpeed;
         
         Invoke(nameof(OnBecameInvisible), 6f);
     }
@@ -27,6 +31,8 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // 1
+        /*
         if (gameObject.CompareTag("Player Projectile") && collision.gameObject.CompareTag("Enemy"))
         {
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
@@ -44,6 +50,23 @@ public class Projectile : MonoBehaviour
             EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
             SpawnParticles();
             enemy.Damage(damage);
+        }
+        */
+
+        // 2
+        if(collision.gameObject.CompareTag("Enemy")){
+            if(gameObject.CompareTag("Player Projectile")){
+                Destroy(gameObject);
+            }
+            EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+            SpawnParticles();
+            enemy.Damage(damage);
+        }
+        else if(collision.gameObject.CompareTag("Player")){
+            if(gameObject.CompareTag("Enemy Projectile")){
+                GameManager.instance.DamagePlayer(damage);
+                Destroy(gameObject);
+            }
         }
     }
 

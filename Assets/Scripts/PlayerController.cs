@@ -17,11 +17,12 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed;
     private float curSpeed;
     private Camera mainCam;
-    public GameObject shooter;
+    public GameObject playerSprite;
+    private Vector3 launchDirection = new Vector3(0, 0, 0);
 
 
     [Header("Basic Projectile")]
-    public GameObject projectile;
+    public GameObject projectilePrefab;
     public float fireRate;
     private float coolDown;
     public float damage = 5;
@@ -31,16 +32,21 @@ public class PlayerController : MonoBehaviour
     [Header("Missile")]
     public GameObject missilePrefab;
     public float spawnDistance;
+    public GameObject missileGuide;
+    public int missilePower;
+    /*
     private GameObject _currentProjectile;
     private float rotationSpeed = 100f;
     private float _rotateAngle = 90f;
     private int _rotateDirection = 0;
     public float launchSpeed = 5f;
+    */
 
     [Header("Skills")]
-    [HideInInspector] public float skillPower = 1;
+    [SerializeField] bool isUsingSkill;
+    public int skillPower = 1;
     public float ChargeTime = 1.5f;
-    public GameObject gravityShot;
+    [SerializeField] GameObject gravityShot;
     [SerializeField] bool isChargeing;
     public bool isShielded;
 
@@ -58,8 +64,6 @@ public class PlayerController : MonoBehaviour
         rend = GetComponent<SpriteRenderer>();
     }
 
-
-    // Update is called once per frame
     void Update()
     {
         if (gm.isPlaying)
@@ -68,149 +72,135 @@ public class PlayerController : MonoBehaviour
             Vector3 worldPos = mainCam.WorldToScreenPoint(transform.localPosition);
             Vector2 offset = new Vector2(mousePos.x - worldPos.x, mousePos.y - worldPos.y);
             float angle = Mathf.Atan2(offset.y, offset.x) * Mathf.Rad2Deg;
-            shooter.transform.rotation = Quaternion.Euler(0, 0, angle);
+            playerSprite.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
 
             Vector2 moveDir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
             transform.Translate(moveDir.normalized * curSpeed * Time.deltaTime, Space.World);
+            
+            // Projectile
             if (coolDown > 0)
             {
                 coolDown -= Time.deltaTime;
             }
             else
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetButton("Fire1"))
                 {
-                    Shoot();
-
-                }
-            }
-
-            if (Input.GetMouseButton(1))
-            {
-                if (_currentProjectile != null)
-                {
-                    RotateProjectile();
-                }
-            }
-
-            if (Input.GetMouseButtonDown(1) && _currentProjectile == null)
-            {
-                if (gm.missileAmount > 0)
-                {
-                    _rotateDirection = -1;
-                    SpawnProjectile();
-                }
-
-            }
-
-            if (Input.GetMouseButtonUp(1))
-            {
-                if (_currentProjectile != null)
-                {
-                    // Launch current projectile
                     LaunchProjectile();
-
                 }
             }
 
-        
-        } else {
+            // Missile, Launch once for each click
+            if (Input.GetButtonDown("Fire2"))
+            {
+                StartCoroutine(LaunchMissile());
+            }
+
+            // Skill Usage
+            if(!isUsingSkill){
+                if (Input.GetButtonDown("Skill1"))
+                {
+                    isUsingSkill = true;
+                    FXRush();
+                    Invoke(nameof(StopUsingSkill), ChargeTime);
+                }
+                if (Input.GetButtonDown("Skill2"))
+                {
+                    isUsingSkill = true;
+                    FXShield();
+                    Invoke(nameof(StopUsingSkill), ChargeTime);
+                }
+                if (Input.GetButtonDown("Skill3"))
+                {
+                    isUsingSkill = true;
+                    FXGravityShot();
+                    Invoke(nameof(StopUsingSkill), ChargeTime);
+                }
+            }
+        } 
+        else 
+        {
             playerRb.linearVelocity = Vector2.zero;
         }
     }
 
-    void Shoot()
+    void LaunchProjectile()
     {
-        Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, -90f) + shooter.transform.rotation.eulerAngles));
+        Instantiate(projectilePrefab, transform.position, Quaternion.Euler(launchDirection + playerSprite.transform.rotation.eulerAngles));
         coolDown = fireRate;
     }
 
-    private void SpawnProjectile()
+    private IEnumerator LaunchMissile()
     {
-        if (_currentProjectile == null)
+        if(gm.missileAmount <= 0)
         {
-            gm.missileAmount -= 1;
-            UIManager.instance.UpdateMissile();
-            Vector3 spawnPos = transform.position + Vector3.up * spawnDistance;
+            yield break;
+        }
+        else // If you have missiles
+        {
+            // Show Missile Prep
+            missileGuide.SetActive(true);
+            yield return new WaitForSeconds(1f);
 
-            _currentProjectile = Instantiate(missilePrefab, spawnPos, Quaternion.identity);
-            _currentProjectile.tag = "Untagged";
+            // Hide Missile Prep
+            missileGuide.SetActive(false);
+            Instantiate(missilePrefab, transform.position, Quaternion.Euler(launchDirection + playerSprite.transform.rotation.eulerAngles));
+
+            gm.NotifyMissileUsed();
         }
     }
 
-    private void RotateProjectile()
-    {
-        _rotateAngle += rotationSpeed * _rotateDirection * Time.deltaTime;
-        var radian = _rotateAngle * Mathf.Deg2Rad;
-        var newPos = transform.position + new Vector3(Mathf.Cos(radian), Mathf.Sin(radian), 0) * spawnDistance;
-        _currentProjectile.transform.position = newPos;
-        //_currentProjectile.transform.rotation = Quaternion.Euler(0, 0, - _rotateAngle);
-    }
-
-    private void LaunchProjectile()
-    {
-        _currentProjectile.tag = "Missile Projectile";
-
-        var direction = (_currentProjectile.transform.position - transform.position).normalized;
-        var rb = _currentProjectile.GetComponent<Rigidbody2D>();
-        _currentProjectile.transform.rotation = Quaternion.Euler(direction);
-
-        rb.linearVelocity = direction * launchSpeed;
-
-
-        // Init current projectile
-        _currentProjectile = null;
-        _rotateAngle = 90;
-        _rotateDirection = 0;
-    }
-
-    public void GravityShot()
-    {
-        Debug.Log("shot gravity shot");
-        GameObject gravShot = Instantiate(gravityShot, transform.position, shooter.transform.rotation);
-        gravShot.transform.localScale *= skillPower;
-    }
-
-    public void Charge()
+    // Item FX
+    public void FXRush()
     {
         if (!isChargeing)
         {
             isChargeing = true;
             curSpeed *= 4;
-            StartCoroutine("ChargeCo");
+            StartCoroutine(FXRushCo());
         }
-
     }
-    IEnumerator ChargeCo()
+    IEnumerator FXRushCo()
     {
         yield return new WaitForSeconds(1f * skillPower);
         isChargeing = false;
         curSpeed = moveSpeed;
     }
 
-    public void Shield()
+    public void FXShield()
     {
         if (!isShielded)
         {
             isShielded = true;
             shield.SetActive(true);
-            StartCoroutine("ShieldCo");
+            StartCoroutine(FXShieldCo());
         }
-
     }
-    IEnumerator ShieldCo()
+    IEnumerator FXShieldCo()
     {
-        yield return new WaitForSeconds(1f * skillPower);
+        yield return new WaitForSeconds(3f * skillPower);
         isShielded = false;
         shield.SetActive(false);
     }
 
+    public void FXGravityShot()
+    {
+        Debug.Log("shot gravity shot");
+        GameObject gravShot = Instantiate(gravityShot, transform.position, playerSprite.transform.rotation);
+        gravShot.transform.localScale *= skillPower;
+    }
+
+    private void StopUsingSkill()
+    {
+        isUsingSkill = false;
+    }
+
+    // Collision
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (isChargeing && collision.gameObject.CompareTag("Enemy"))
+        if (isChargeing && collision.gameObject.CompareTag("Enemy")) // FXRush effects
         {
             collision.gameObject.GetComponent<EnemyController>().Damage(10f);
         }
     }
-
 }

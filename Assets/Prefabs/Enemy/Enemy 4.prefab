@@ -56,7 +56,7 @@ MonoBehaviour:
   fireRate: 4
   range: 8
   isShootingBeforeRange: 1
-  enemyScore: 4
+  enemyScore: 10
 --- !u!58 &7384792227603043670
 CircleCollider2D:
   m_ObjectHideFlags: 0
