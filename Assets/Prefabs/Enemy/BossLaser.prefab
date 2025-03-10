@@ -139,7 +139,7 @@ MonoBehaviour:
   isSteerable: 1
   health: 10
   moveSpeed: 4
-  collisionDamage: 30
+  collisionDamage: 25
   projectile: {fileID: 0}
   fireRate: 3
   range: 20
@@ -234,7 +234,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Time: 1.25
-  m_PreviewTimeScale: 0.6
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

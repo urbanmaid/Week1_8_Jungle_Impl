@@ -22,6 +22,7 @@ public class BossSpawner : MonoBehaviour
 
     [Header("Difficulty Control")]
     [SerializeField] float bossLifeInit = 10;
+    [SerializeField] float additionToLevel = 2;
     private float bossLifeCurrent;
     public int bossSpawnedCount = 0;
 
@@ -57,7 +58,7 @@ public class BossSpawner : MonoBehaviour
         bossObject = Instantiate(bossList[Random.Range(0, bossList.Count)], SetSpawnLocation(), Quaternion.identity);
         bossObject.GetComponent<BossEnemy>().SetLife(bossLifeCurrent);
 
-        bossLifeCurrent += 2 * bossSpawnedCount;
+        bossLifeCurrent += additionToLevel * bossSpawnedCount;
         //Debug.Log("Boss life: " + bossLifeCurrent);
 
         UIManager.instance.ActivateAnnoucer(13);

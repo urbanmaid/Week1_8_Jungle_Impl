@@ -52,7 +52,7 @@ MonoBehaviour:
   isSteerable: 1
   health: 10
   moveSpeed: 4
-  collisionDamage: 30
+  collisionDamage: 25
   projectile: {fileID: 0}
   fireRate: 0
   range: 0
@@ -142,7 +142,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Time: 1.25
-  m_PreviewTimeScale: 0.6
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -314,6 +314,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ce80a0b46d600046bb26d5da49eaeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rangeCollider: {fileID: 0}
+  effector2D: {fileID: 0}
+  effectorForceInit: -280
+  effectorScaleInit: 6
+  effectorForceInterval: -40
+  effectorScaleInterval: 2
+  AffectedObjectTag: Player
 --- !u!1001 &5174061482900881633
 PrefabInstance:
   m_ObjectHideFlags: 0

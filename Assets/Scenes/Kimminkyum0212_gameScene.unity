@@ -7226,7 +7226,8 @@ MonoBehaviour:
   isBossSpawned: 0
   spawnInterval: 18
   distFromPlayerToEnemy: 40
-  bossLifeInit: 8
+  bossLifeInit: 7
+  additionToLevel: 1
   bossSpawnedCount: 0
 --- !u!114 &983784280
 MonoBehaviour:

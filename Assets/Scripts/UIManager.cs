@@ -195,6 +195,8 @@ public class UIManager : MonoBehaviour
 
         gameInfo.SetActive(true);
         upgradePanel.SetActive(false);
+        GameManager.instance.isDamagable = false;
+        StartCoroutine(GameManager.instance.ResetDamagable());
 
         statusAnnouncer.ActivateAnnoucer(8+upgradeCode);
         GameManager.instance.AddPhase();
