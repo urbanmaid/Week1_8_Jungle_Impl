@@ -16635,19 +16635,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_PreviewTimeScale
-      value: 0.6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0.9137255
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Parameters.colorGradient.key0.r
-      value: 0.74509805
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0.9137255
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.g
@@ -16655,7 +16659,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7159837064278039083, guid: 9e3111c60fb425e4ab2a4e05ed125915, type: 3}
       propertyPath: m_Parameters.colorGradient.key1.r
-      value: 0.74509805
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
