@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemCode: 12
   healMount: 10
-  buffAmount: 2
+  buffAmount: 1
 --- !u!58 &367927551905419508
 CircleCollider2D:
   m_ObjectHideFlags: 0

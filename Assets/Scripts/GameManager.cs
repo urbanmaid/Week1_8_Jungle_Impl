@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public float curHealth;
     public int curPhase;
     public bool isPlaying;
+    public bool isScorable;
     public int missileAmount;
 
     public int skillRush = 1;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     {
         curHealth = maxHealth;
         curPhase = 0;
+        isScorable = true;
         //missileAmount = 0;
 
         // Initialize the game UI with the current value of player
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
             cameraController.ShakeCamera();
         }
         curHealth -= damage;
+        curHealth = (int)curHealth;
         
         if (curHealth <= 0)
         {
@@ -92,7 +95,7 @@ public class GameManager : MonoBehaviour
         }
         else if(curHealth > maxHealth)
         {
-            Debug.Log("Health Overflow detected, resetting health to max.");
+            //Debug.Log("Health Overflow detected, resetting health to max.");
             curHealth = maxHealth;
         }
 
@@ -155,9 +158,11 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseScore(int score)
     {
-        scoreTotal += score;
-        ItemSpawnConditionManager.instance.AddScore(score);
-        UIManager.instance.UpdateScore();
+        if(isScorable){
+            scoreTotal += score;
+            ItemSpawnConditionManager.instance.AddScore(score);
+            UIManager.instance.UpdateScore();
+        }
     }
 
     internal void UpdateScoreTarget(int scoreTarget)
@@ -166,5 +171,9 @@ public class GameManager : MonoBehaviour
         UIManager.instance.UpdateScore();
     }
 
-
+    internal void SetScoreable(bool value)
+    {
+        isScorable = value;
+        Debug.Log(isScorable);
+    }
 }

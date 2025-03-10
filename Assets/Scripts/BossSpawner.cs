@@ -43,7 +43,7 @@ public class BossSpawner : MonoBehaviour
             timeSinceLastSpawn += Time.deltaTime;
             if (timeSinceLastSpawn >= spawnInterval)
             {
-                Debug.Log("Boss spawned");
+                //Debug.Log("Boss spawned");
                 SpawnBoss();
                 isBossSpawned = true;
                 timeSinceLastSpawn = 0f;

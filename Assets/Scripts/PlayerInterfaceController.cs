@@ -15,6 +15,22 @@ public class PlayerInterfaceController : MonoBehaviour
         itemNotifier.SetActive(true);
     }
 
+    public void SetItemObjectInInstances()
+    {
+        int index = ItemObject.instances.Count;
+        if(index == 0)
+        {
+            SetItemNotifier(false);
+        }
+        else
+        {
+            itemObject = ItemObject.instances[index - 1].gameObject;
+            SetItemNotifier(true);
+        }
+
+        Debug.Log(index);
+    }
+
     public void SetItemNotifier(bool status)
     {
         itemNotifier.SetActive(status);

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private GameManager gm;
 
     [Header("Components")]
-    private Collider2D coll;
+    private Collider2D col;
     private SpriteRenderer rend;
     private Rigidbody2D playerRb;
 
@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
         mainCam = Camera.main;
         isRushing = false;
         curSpeed = moveSpeed;
-        coll = GetComponent<Collider2D>();
+        col = GetComponent<Collider2D>();
         rend = GetComponent<SpriteRenderer>();
     }
 
@@ -224,7 +224,7 @@ public class PlayerController : MonoBehaviour
 
     public void FXGravityShot()
     {
-        Debug.Log("shot gravity shot");
+        //Debug.Log("shot gravity shot");
         GameObject gravShot = Instantiate(gravityShot, transform.position, playerSprite.transform.rotation);
         //gravShot.transform.localScale *= skillPower;
         // Find child which has BlackHole component and set scale of radius
@@ -245,7 +245,7 @@ public class PlayerController : MonoBehaviour
         {
             collision.gameObject.GetComponent<EnemyController>().Damage(8f + (4f * skillPower));
             Instantiate(projectileParticle, transform.position, Quaternion.identity);
-            Debug.Log(8f + (4f * skillPower));
+            //Debug.Log(8f + (4f * skillPower));
         }
     }
 }

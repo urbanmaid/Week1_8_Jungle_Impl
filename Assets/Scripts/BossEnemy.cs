@@ -84,7 +84,7 @@ public class BossEnemy : EnemyController
     {
         if(collision.CompareTag("Player")){
             if(collision.GetComponent<PlayerController>().isRushing){
-                gm.DamagePlayer(collisionDamage / 4f);
+                gm.DamagePlayer(collisionDamage / 3f);
             }
             else
             {
@@ -98,6 +98,6 @@ public class BossEnemy : EnemyController
     {
         health = healthInput;
         initHealth = healthInput;
-        Debug.Log("Boss life: " + health);
+        //Debug.Log("Boss life: " + health);
     }
 }
