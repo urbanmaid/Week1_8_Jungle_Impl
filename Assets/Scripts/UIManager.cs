@@ -205,7 +205,7 @@ public class UIManager : MonoBehaviour
         gameInfo.SetActive(false);
         gm.isPlaying = false;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         EvaulateScore();
         endPanel.SetActive(true);
         scoreTextGameOver.text = "" + gm.scoreTotal;
@@ -254,7 +254,7 @@ public class UIManager : MonoBehaviour
 
     internal IEnumerator SetCompleteScreen(bool value)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(1.5f);
         completePanel.SetActive(value);
         scoreTextComplete.text = "" + gm.scoreTotal;
     }
