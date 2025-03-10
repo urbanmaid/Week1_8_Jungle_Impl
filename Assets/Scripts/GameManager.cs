@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public int scoreTotal = 0;
     internal int scoreTotalTarget = 0;
+
+    [Header("Epilogue")]
+    [SerializeField] EpiloguePresenter epiloguePresenter;
+    public bool isInEpilogue = false;
+    [SerializeField] int epilogueTargetPhase = 10;
     
     private void Awake()
     {
@@ -68,11 +73,18 @@ public class GameManager : MonoBehaviour
     {
         UIManager.instance.UpdatePhase();
 
-        if(curPhase == 2){
+        if(curPhase == 2)
+        {
             UIManager.instance.ActivateAnnoucer(11);
         }
-        if(curPhase == 3){
+        else if(curPhase == 3)
+        {
             UIManager.instance.ActivateAnnoucer(12);
+        }
+        else if(curPhase == epilogueTargetPhase)
+        {
+            isInEpilogue = true;
+            epiloguePresenter.gameObject.SetActive(true);
         }
     }
 

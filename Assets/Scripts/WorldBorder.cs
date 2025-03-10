@@ -12,7 +12,9 @@ public class WorldBorder : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")){
-            UIManager.instance.ActivateAnnoucer(19);
+            if(gm.curPhase > 0){
+                UIManager.instance.ActivateAnnoucer(19);
+            }
             gm.SetScoreable(true);
         }
     }
@@ -20,7 +22,9 @@ public class WorldBorder : MonoBehaviour
     void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")){
-            UIManager.instance.ActivateAnnoucer(14);
+            if(!gm.isInEpilogue){
+                UIManager.instance.ActivateAnnoucer(14);
+            }
             gm.SetScoreable(false);
         }
     }
