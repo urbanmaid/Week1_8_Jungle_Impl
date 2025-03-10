@@ -69,28 +69,21 @@ public class BossEnemy : EnemyController
         {
             return;
         }
-
-        // Move toward player
-        /*
-        Vector2 targetDir = (player.transform.position - transform.position).normalized;
-        var angle = Mathf.Atan2(targetDir.y, targetDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle - 90));
-        transform.position =
-            Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
-        */
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player")){
-            if(collision.GetComponent<PlayerController>().isRushing){
-                gm.DamagePlayer(collisionDamage / 3f);
+            PlayerController pc = collision.GetComponent<PlayerController>();
+            if(!pc.isShielded){ // Only damagable when shielded
+                if(pc.isRushing){
+                    gm.DamagePlayer(collisionDamage / 3f);
+                }
+                else
+                {
+                    gm.DamagePlayer(collisionDamage);
+                }
             }
-            else
-            {
-                gm.DamagePlayer(collisionDamage);
-            }
-            //StartCoroutine("WaitCo");            
         }
     }
 

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public int curPhase;
     public bool isPlaying;
     public bool isScorable;
+    public bool isDamagable;
     public int missileAmount;
 
     public int skillRush = 1;
@@ -34,7 +35,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] EpiloguePresenter epiloguePresenter;
     public bool isInEpilogue = false;
     [SerializeField] int epilogueTargetPhase = 10;
-    
+    internal Transform mothershipTransform;
+    private float gameCompleteDist = 4f;
+
     private void Awake()
     {
         if (instance == null)
@@ -54,6 +57,7 @@ public class GameManager : MonoBehaviour
         curHealth = maxHealth;
         curPhase = 0;
         isScorable = true;
+        isDamagable = true;
         //missileAmount = 0;
 
         // Initialize the game UI with the current value of player
@@ -90,17 +94,22 @@ public class GameManager : MonoBehaviour
 
     public void DamagePlayer(float damage)
     {
-        if(damage > 0 && !player.GetComponent<PlayerController>().isShielded){
-            cameraController.ShakeCamera();
+        if(isDamagable){
+            if(damage > 0 && !player.GetComponent<PlayerController>().isShielded){
+                cameraController.ShakeCamera();
+            }
+            curHealth -= damage;
+            curHealth = (int)curHealth;
         }
-        curHealth -= damage;
-        curHealth = (int)curHealth;
+        isDamagable = false;
+        StartCoroutine(ResetDamagable());
         
+        // Action when health is 0, or dangerous, or healing
         if (curHealth <= 0)
         {
             isPlaying = false;
             player.SetActive(false);
-            UIManager.instance.EndGame();
+            StartCoroutine(UIManager.instance.EndGame());
         }
         else if(curHealth < 25){
             UIManager.instance.ActivateAnnoucer(16);
@@ -112,6 +121,12 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.instance.UpdateHealth();
+    }
+
+    internal IEnumerator ResetDamagable()
+    {
+        yield return new WaitForSeconds(0.5f);
+        isDamagable = true;
     }
 
     // Skill Management
@@ -187,5 +202,34 @@ public class GameManager : MonoBehaviour
     {
         isScorable = value;
         Debug.Log(isScorable);
+    }
+
+    internal void NotifyMothership(GameObject mothership) // If mothership has been spawned this is called
+    {
+        mothershipTransform = mothership.transform;
+        UIManager.instance.SetMothershipDist(true);
+        StartCoroutine(UpdateMothershipDistance());
+    }
+
+    IEnumerator UpdateMothershipDistance() // Called in 1 sec and shows distance
+    {
+        while(true){
+            yield return new WaitForSeconds(1f);
+            float dist = Vector3.Distance(player.transform.position, mothershipTransform.position);
+            //Debug.Log(dist);
+            UIManager.instance.UpdateMothershipDist((int) dist);
+            if(dist < gameCompleteDist)
+            {
+                NotifyGameComplete();
+                break;
+            }
+        }
+    }
+
+    private void NotifyGameComplete()
+    {
+        isPlaying = false;
+        Debug.Log("Game Complete!");
+        StartCoroutine(UIManager.instance.SetCompleteScreen(true));
     }
 }

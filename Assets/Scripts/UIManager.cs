@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.Rendering;
 using System;
+using System.Collections;
 
 public class UIManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI skillRushText, skillShieldText, skillGravityShotText;
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI scoreTextGameOver;
+    [SerializeField] TextMeshProUGUI scoreTextComplete;
     [SerializeField] TextMeshProUGUI upgradeConfirmText;
     [SerializeField] StatusAnnouncer statusAnnouncer;
 
@@ -22,22 +24,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject endPanel;
+    [SerializeField] GameObject completePanel; 
     [SerializeField] GameObject gameInfo; 
-    
-    [Header("Instruction")]
-    [SerializeField] TextMeshProUGUI instructionText;
-    [SerializeField] TextAsset instructionContent;
-    [SerializeField] GameObject[] instructionContentSprite;
-
-    private int instructionContentIndex = 0;
-    private int instructionContentLength = 0;
-    private string[] instructionContentString;
-    private GameObject instructionContentSpriteNow;
 
     [Header("Status")]
     [SerializeField] int missileLvl;
     [SerializeField] int attackLvl;
     [SerializeField] int skillLvl;
+    [SerializeField] TextMeshProUGUI mothershipDistText;
+    [SerializeField] GameObject mothershipDist;
+
     private int upgradeCode;
     private string upgradeStringInit;
     private float time;
@@ -204,10 +200,12 @@ public class UIManager : MonoBehaviour
         GameManager.instance.AddPhase();
     }
 
-    public void EndGame()
+    public IEnumerator EndGame()
     {
         gameInfo.SetActive(false);
         gm.isPlaying = false;
+
+        yield return new WaitForSeconds(1f);
         EvaulateScore();
         endPanel.SetActive(true);
         scoreTextGameOver.text = "" + gm.scoreTotal;
@@ -244,61 +242,36 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
-    /*
-    public void ShowInstruction()
+    internal void SetMothershipDist(bool value)
     {
-        startPanel.SetActive(false);
-        instructionPanel.SetActive(true);
-
-        instructionContentIndex = 0;
-        instructionContentString = instructionContent.text.Split('\n');
-
-        instructionContentLength = instructionContentString.Length;
-
-        Debug.Log("Length of dialogue: " + instructionContentLength);
-
-        // Set text and sprite
-        instructionText.text = instructionContentString[instructionContentIndex];
-        RefreshInstructionSprite();
+        mothershipDist.SetActive(value);
     }
 
-    public void InstructionControllPrev()
+    internal void UpdateMothershipDist(float value)
     {
-        if(instructionContentIndex > 0)
-        {
-            instructionContentIndex -= 1;
-            RefreshInstructionSprite();
-            instructionText.text = instructionContentString[instructionContentIndex];
-        }
+        mothershipDistText.text = value + "";
     }
 
-    public void InstructionControllNext()
+    internal IEnumerator SetCompleteScreen(bool value)
     {
-        if(instructionContentIndex < instructionContentLength - 1)
-        {
-            instructionContentIndex += 1;
-            RefreshInstructionSprite();
-            instructionText.text = instructionContentString[instructionContentIndex];
-        }
-        else
-        {
-            StartGame();
-        }
+        yield return new WaitForSeconds(1f);
+        completePanel.SetActive(value);
+        scoreTextComplete.text = "" + gm.scoreTotal;
     }
 
-    public void RefreshInstructionSprite()
+    public void ContinueAfterComplete()
     {
-        Destroy(instructionContentSpriteNow);
-        if(instructionContentSprite[instructionContentIndex] != null)
-        {
-            instructionContentSpriteNow = Instantiate(instructionContentSprite[instructionContentIndex], transform.position, Quaternion.identity);
-        }
+        StartCoroutine(ContinueAfterCompleteCo());
     }
 
-    public void CloseInstruction()
+    private IEnumerator ContinueAfterCompleteCo()
     {
-        instructionPanel.SetActive(false);
-        startPanel.SetActive(true);
+        completePanel.SetActive(false);
+        mothershipDist.SetActive(false);
+
+        Destroy(gm.mothershipTransform.gameObject);
+
+        yield return new WaitForSeconds(1f);
+        gm.isPlaying = true;
     }
-    */
 }

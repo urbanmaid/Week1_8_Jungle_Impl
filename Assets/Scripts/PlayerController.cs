@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (Input.GetButton("Fire1"))
+            if (true) //Input.GetButton("Fire1")
             {
                 LaunchProjectile();
             }
@@ -188,6 +188,7 @@ public class PlayerController : MonoBehaviour
 
             // Affecting physics
             playerRb.linearVelocity = offset.normalized * rushingSpeed;
+            gm.isDamagable = false;
             StartCoroutine(FXRushCo());
         }
     }
@@ -202,6 +203,8 @@ public class PlayerController : MonoBehaviour
         curSpeed = moveSpeed;
         isUsingSkill = false;
         gm.ToggleShakeCamera(false);
+
+        StartCoroutine(gm.ResetDamagable()); // Prevents damaging after finished rushing
     }
 
     public void FXShield()

@@ -15,7 +15,9 @@ public class SwarmDispenser : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
-        transform.position = player.transform.position;
+        if(player){
+            transform.position = player.transform.position;
+        }
         rotationOffset = Random.Range(0, 360);
         //transform.Rotate(0, 0, rotaltionOffset);
 

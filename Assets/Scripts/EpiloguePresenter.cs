@@ -26,7 +26,7 @@ public class EpiloguePresenter : MonoBehaviour
 
     void SpawnEpilogueTarget()
     {
-        Instantiate(epilogueTarget, SetSpawnLocation(), Quaternion.identity);
+        Instantiate(epilogueTarget, SetSpawnLocation(), Quaternion.Euler(0, 0, Random.Range(0f, 360f)));
         UIManager.instance.ActivateAnnoucer(20);
     }
 
