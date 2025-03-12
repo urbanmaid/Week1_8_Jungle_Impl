@@ -55,7 +55,7 @@ public class RandomEnemySpawner : MonoBehaviour
     {
         if(spawnStartPhase <= gm.curPhase){
             timeSinceLastSpawn += Time.deltaTime;
-            if (timeSinceLastSpawn >= spawnInterval)
+            if (timeSinceLastSpawn >= spawnInterval && gm.isPlaying)
             {
                 SpawnEnemy();
                 timeSinceLastSpawn = 0f;

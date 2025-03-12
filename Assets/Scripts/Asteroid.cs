@@ -28,7 +28,10 @@ public class Asteroid : MonoBehaviour
         || collision.CompareTag("Enemy Projectile")
         )
         {
-            Destroy(collision.gameObject);
+            if(collision.GetComponent<RushBossEnemy>() == null) // it is Rush Boss Pass
+            {
+                Destroy(collision.gameObject);
+            }
         }
         else if(collision.CompareTag("Player"))
         {
