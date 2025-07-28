@@ -12,5 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Kimminkyum0212_gameScene.unity
     guid: 5bd9b39214d543e4aa790490c0754b1c
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: cd67fd19d20215c47820ca47cb4ed66b, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: 66359543d0dc0fe4f86af44e10339e51, type: 2}
   m_UseUCBPForAssetBundles: 0

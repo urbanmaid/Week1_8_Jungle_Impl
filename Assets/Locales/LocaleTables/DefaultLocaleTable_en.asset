@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: DefaultLocaleTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 048d12dad0a97f44094530d24180390f, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 179012730880
+    m_Localized: Survival story about the last pilot of Factor8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436450721792
+    m_Localized: Prologue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 556382650368
+    m_Localized: Instructions
+    m_Metadata:
+      m_Items: []
+  - m_Id: 558723072000
+    m_Localized: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 662808920064
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703678218240
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14139380301824
+    m_Localized: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14069423505408
+    m_Localized: Missile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14020002021376
+    m_Localized: Mothership Dist
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13997512163328
+    m_Localized: Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3259255062528
+    m_Localized: Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46522372554752
+    m_Localized: Upgrade Spaceship
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46630631735296
+    m_Localized: Upgrade your spaceship to address stronger enemies. Select options
+      of upgrade.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46670171439104
+    m_Localized: Missile damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46737951391744
+    m_Localized: Ammo firerate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46763100438528
+    m_Localized: Skill power
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46792745779200
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49892508401664
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49985412235264
+    m_Localized: Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52983018389504
+    m_Localized: Game Cleared!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53061065998336
+    m_Localized: 'Congratulations. You have been safely rescued from the enemy threat
+      after meeting the relief force.
+
+      
+
+      History will remember you
+      as an eternal member of Factor8 for protecting the honor of your comrades in
+      the midst of tragedy.
+
+      
+
+      If you want to continue the battle,
+      click Continue.'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56176108470272
+    m_Localized: Restart from Beginning
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56400780558336
+    m_Localized: Continue
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

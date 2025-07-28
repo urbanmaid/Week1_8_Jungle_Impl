@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: DefaultLocaleTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: DefaultLocaleTable
+  m_TableCollectionNameGuidString: 048d12dad0a97f44094530d24180390f
+  m_Entries:
+  - m_Id: 179012730880
+    m_Key: UI.TitleDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 436450721792
+    m_Key: UI.Menu.Prologue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 556382650368
+    m_Key: UI.Menu.Instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 558723072000
+    m_Key: UI.Menu.Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 662808920064
+    m_Key: UI.Menu.Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 703678218240
+    m_Key: UI.Menu.Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3259255062528
+    m_Key: UI.Ingame.Phase
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13997512163328
+    m_Key: UI.Ingame.Score
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14020002021376
+    m_Key: UI.Ingame.Mothership
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14069423505408
+    m_Key: UI.Ingame.Missile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14139380301824
+    m_Key: UI.Ingame.Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46522372554752
+    m_Key: UI.Upgrade.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46630631735296
+    m_Key: UI.Upgrade.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46670171439104
+    m_Key: UI.Upgrade.Missile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46737951391744
+    m_Key: UI.Upgrade.Firerate
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46763100438528
+    m_Key: UI.Upgrade.Skillpower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 46792745779200
+    m_Key: UI.Upgrade.Confirm
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49892508401664
+    m_Key: UI.Gameover.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 49985412235264
+    m_Key: UI.Gameover.Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 52983018389504
+    m_Key: UI.Clear.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 53061065998336
+    m_Key: UI.Clear.Desc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56176108470272
+    m_Key: UI.Clear.Restart
+    m_Metadata:
+      m_Items: []
+  - m_Id: 56400780558336
+    m_Key: UI.Clear.Continue
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 5146536397675954447
+  references:
+    version: 2
+    RefIds:
+    - rid: 5146536397675954447
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1753701125323
