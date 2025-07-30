@@ -9,6 +9,7 @@ using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
+using System.Collections.Generic;
 
 public class UIManager : MonoBehaviour
 {
@@ -24,12 +25,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI upgradeConfirmText;
     [SerializeField] StatusAnnouncer statusAnnouncer;
 
-    [Header("Menu Configuration")]
+    [Header("Screen Panels")]
     [SerializeField] GameObject startPanel;
     [SerializeField] GameObject upgradePanel;
     [SerializeField] GameObject endPanel;
-    [SerializeField] GameObject completePanel; 
-    [SerializeField] GameObject gameInfo; 
+    [SerializeField] GameObject completePanel;
+    [SerializeField] GameObject ingamePlayPanel;
+    [SerializeField] GameObject settingsPanel;
 
     [Header("Status")]
     [SerializeField] int missileLvl;
@@ -55,7 +57,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] LocalizedString quoteAmateur;
     [SerializeField] LocalizedString quoteIntermediate;
     [SerializeField] LocalizedString quotePro;
-    
+
+    [Header("Settings")]
+    [SerializeField] TMP_Dropdown languageDropdown;
+    private bool isInitialized;
+
+    #region Default Func
+
     void Awake()
     {
         if (instance == null)
@@ -82,6 +90,9 @@ public class UIManager : MonoBehaviour
             upgradeStringInit = upgradeConfirmText.text;
         }
     }
+
+    #endregion
+    #region Update
 
     void Update()
     {
@@ -132,11 +143,15 @@ public class UIManager : MonoBehaviour
         timerText.text = min + ":" + sec.ToString("D2");
     }
 
+    #endregion
+    #region Announcer
+
     internal void ActivateAnnoucer(int code)
     {
         statusAnnouncer.ActivateAnnoucer(code);
     }
 
+    // #Button
     public void StartGame()
     {
         startPanel.SetActive(false);
@@ -145,7 +160,7 @@ public class UIManager : MonoBehaviour
         gm.isPlaying = true;
         gm.player.SetActive(true);
         gm.managers.SetActive(true);
-        gameInfo.SetActive(true);
+        ingamePlayPanel.SetActive(true);
         Invoke(nameof(StartAnnouce), 2f);
     }
 
@@ -153,6 +168,9 @@ public class UIManager : MonoBehaviour
     {
         statusAnnouncer.ActivateAnnoucer(0);
     }
+
+    #endregion
+    #region Upgrade
 
     public void Upgrade()
     {
@@ -165,7 +183,7 @@ public class UIManager : MonoBehaviour
         {
             gm.isPlaying = false;
             upgradePanel.SetActive(true);
-            gameInfo.SetActive(false);
+            ingamePlayPanel.SetActive(false);
         }
     }
 
@@ -178,7 +196,7 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(SetCombinedTextRoutine(text));
     }
-    
+
     private IEnumerator SetCombinedTextRoutine(string itemEntryKey)
     {
         // 이 로직은 LocalizeStringEvent를 직접 사용하지 않고 수동으로 텍스트를 설정합니다.
@@ -246,7 +264,7 @@ public class UIManager : MonoBehaviour
         }
         gm.isPlaying = true;
 
-        gameInfo.SetActive(true);
+        ingamePlayPanel.SetActive(true);
         upgradePanel.SetActive(false);
         GameManager.instance.isDamagable = false;
         StartCoroutine(GameManager.instance.ResetDamagable());
@@ -255,9 +273,12 @@ public class UIManager : MonoBehaviour
         GameManager.instance.AddPhase();
     }
 
+    #endregion
+    #region Gameover
+
     public IEnumerator EndGame()
     {
-        gameInfo.SetActive(false);
+        ingamePlayPanel.SetActive(false);
         gm.isPlaying = false;
 
         yield return new WaitForSeconds(1.5f);
@@ -291,6 +312,9 @@ public class UIManager : MonoBehaviour
         gameoverEvalText.text = evaluationString.GetLocalizedStringAsync().Result;
     }
 
+    #endregion
+    #region GameOver Button
+
     public void Restart()
     {
         Scene scene = SceneManager.GetActiveScene();
@@ -302,6 +326,9 @@ public class UIManager : MonoBehaviour
         Application.Quit();
     }
 
+    #endregion
+    #region Mothership
+
     internal void SetMothershipDist(bool value)
     {
         mothershipDist.SetActive(value);
@@ -311,6 +338,9 @@ public class UIManager : MonoBehaviour
     {
         mothershipDistText.text = value + "";
     }
+
+    #endregion
+    #region Complete
 
     internal IEnumerator SetCompleteScreen(bool value)
     {
@@ -334,4 +364,83 @@ public class UIManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gm.isPlaying = true;
     }
+
+    #endregion
+    #region Settings
+
+    // #Button
+    public void SettingsOpen()
+    {
+        startPanel.SetActive(false);
+        settingsPanel.SetActive(true);
+
+        // Load Languages
+        // languageDropdown에 프로젝트에 있는 로캘 목록을 추가하기
+        if(!isInitialized && (languageDropdown != null)) StartCoroutine(SetupLocalesRoutine());
+    }
+
+    private IEnumerator SetupLocalesRoutine()
+    {
+        // Wait until Localization is Initialized
+        yield return LocalizationSettings.InitializationOperation;
+
+        // Bring all locales
+        var locales = LocalizationSettings.AvailableLocales.Locales;
+        var options = new List<TMP_Dropdown.OptionData>();
+        int currentLocaleIndex = 0;
+
+        // Add locale name as dropdown
+        for (int i = 0; i < locales.Count; i++)
+        {
+            var locale = locales[i];
+            if (LocalizationSettings.SelectedLocale == locale)
+            {
+                currentLocaleIndex = i;
+            }
+            options.Add(new TMP_Dropdown.OptionData(locale.LocaleName));
+        }
+
+        // Remove default options and replace
+        languageDropdown.ClearOptions();
+        languageDropdown.AddOptions(options);
+
+        languageDropdown.SetValueWithoutNotify(currentLocaleIndex);
+        languageDropdown.onValueChanged.AddListener(SetLanguage);
+
+        // Set Language option is initialized
+        isInitialized = true;
+    }
+
+    public void SetLanguage(int index)
+    {
+        if (!isInitialized) return;
+
+        StartCoroutine(SetLocaleRoutine(index));
+    }
+
+    private IEnumerator SetLocaleRoutine(int index)
+    {
+        // 사용자가 다시 클릭하지 못하도록 드롭다운을 잠시 비활성화합니다.
+        languageDropdown.interactable = false;
+
+        var selectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
+        LocalizationSettings.SelectedLocale = selectedLocale;
+
+        // 로캘 변경 작업이 완료될 때까지 기다립니다.
+        // PlayerPrefs에 자동으로 저장되므로 수동으로 저장할 필요가 없습니다.
+        yield return LocalizationSettings.InitializationOperation;
+
+        Debug.Log($"언어가 {selectedLocale.LocaleName}(으)로 변경되었습니다.");
+
+        // 드롭다운을 다시 활성화합니다.
+        languageDropdown.interactable = true;
+    }
+
+    public void SettingsClose()
+    {
+        startPanel.SetActive(true);
+        settingsPanel.SetActive(false);
+    }
+
+    #endregion
 }

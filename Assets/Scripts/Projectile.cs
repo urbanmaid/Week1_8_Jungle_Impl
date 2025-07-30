@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     {
         if(gameObject.CompareTag("Missile Projectile")){
             damage = damage + GameObject.Find("Player").GetComponent<PlayerController>().missilePower * 2;
-            Debug.Log("Missile Damage: " + damage);
+            //Debug.Log("Missile Damage: " + damage);
         }
 
         rb = GetComponent<Rigidbody2D>();

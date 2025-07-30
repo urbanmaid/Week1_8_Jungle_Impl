@@ -85,7 +85,8 @@ public class GameManager : MonoBehaviour
         {
             UIManager.instance.ActivateAnnoucer(12);
         }
-        else if(curPhase == epilogueTargetPhase)
+
+        if (curPhase == epilogueTargetPhase)
         {
             isInEpilogue = true;
             epiloguePresenter.gameObject.SetActive(true);
@@ -201,7 +202,12 @@ public class GameManager : MonoBehaviour
     internal void SetScoreable(bool value)
     {
         isScorable = value;
-        Debug.Log(isScorable);
+        //Debug.Log(isScorable);
+    }
+
+    public void SetEpilogueStart(int phase)
+    {
+        epilogueTargetPhase = phase;
     }
 
     internal void NotifyMothership(GameObject mothership) // If mothership has been spawned this is called

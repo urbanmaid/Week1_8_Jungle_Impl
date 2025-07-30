@@ -28,7 +28,7 @@ public class PlayerInterfaceController : MonoBehaviour
             SetItemNotifier(true);
         }
 
-        Debug.Log(index);
+        //Debug.Log(index);
     }
 
     public void SetItemNotifier(bool status)

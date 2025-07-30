@@ -1,9 +1,9 @@
-using System.Linq;
-using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
 
 public class EpiloguePresenter : MonoBehaviour
 {
+    public static EpiloguePresenter instance;
+
     [SerializeField] GameObject epilogueTarget;
     [SerializeField] float distFromPlayer = 200f;
     private GameObject player;
@@ -13,9 +13,10 @@ public class EpiloguePresenter : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        instance = this;
+
         player = GameObject.Find("Player");
         PrepareEpilogue();
-        //Invoke(nameof(PrepareEpilogue), 10f);
     }
 
     void PrepareEpilogue()
@@ -36,6 +37,11 @@ public class EpiloguePresenter : MonoBehaviour
         {
             disabledWhenEpilogue[i].SetActive(false);
         }
+    }
+
+    public void SetDistOfMothership(float dist)
+    {
+        distFromPlayer = dist;
     }
 
     private Vector3 SetSpawnLocation()

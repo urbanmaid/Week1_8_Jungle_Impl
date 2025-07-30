@@ -290,6 +290,22 @@ MonoBehaviour:
       around you that are displayed here. Then, let's get started.\r"
     m_Metadata:
       m_Items: []
+  - m_Id: 708193810219008
+    m_Localized: Game Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708278266724352
+    m_Localized: SFX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708326450888704
+    m_Localized: BGM
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708685160349696
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

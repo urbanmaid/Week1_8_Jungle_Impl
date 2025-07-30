@@ -331,6 +331,22 @@ MonoBehaviour:
       \uC2A4\uD0AC \uC544\uC774\uD15C\uC744 \uC0AC\uC6A9\uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\r"
     m_Metadata:
       m_Items: []
+  - m_Id: 708193810219008
+    m_Localized: "\uAC8C\uC784 \uC124\uC815"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708278266724352
+    m_Localized: "\uD6A8\uACFC\uC74C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708326450888704
+    m_Localized: "\uBC30\uACBD\uC74C\uC545"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 708685160349696
+    m_Localized: "\uC5B8\uC5B4"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
