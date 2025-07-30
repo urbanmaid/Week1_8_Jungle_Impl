@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Japanese (ja)
   m_EditorClassIdentifier: 
   m_Identifier:
-    m_Code: jp
+    m_Code: ja
   m_Metadata:
     m_Items: []
   m_LocaleName: Japanese (jp)
