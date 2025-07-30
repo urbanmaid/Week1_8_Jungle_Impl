@@ -16,7 +16,7 @@ MonoBehaviour:
   m_GUID: 36b0b853db395194088f783b71cb72af
   m_SerializeEntries:
   - m_GUID: 0b3029b96322dcf4e94e70a1f42650e2
-    m_Address: Japanese (ja)
+    m_Address: Japanese (jp)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
