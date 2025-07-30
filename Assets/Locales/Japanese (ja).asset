@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Japanese (ja)
   m_EditorClassIdentifier: 
   m_Identifier:
-    m_Code: ja
+    m_Code: jp
   m_Metadata:
     m_Items: []
-  m_LocaleName: Japanese (ja)
+  m_LocaleName: Japanese (jp)
   m_CustomFormatCultureCode: 
   m_UseCustomFormatter: 0
   m_SortOrder: 10000

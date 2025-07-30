@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Korean (ko)
   m_EditorClassIdentifier: 
   m_Identifier:
-    m_Code: ko
+    m_Code: kr
   m_Metadata:
     m_Items: []
   m_LocaleName: Korean (ko)

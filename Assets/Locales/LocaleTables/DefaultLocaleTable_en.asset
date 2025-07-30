@@ -226,13 +226,17 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 652401321017344
-    m_Localized: "Go to WASD and aim with your mouse cursor. You can also use skill
-      items with the numeric keys above WASD.\r"
+    m_Localized: 'Go to WASD and aim with your mouse cursor. You can also use skill
+      items with the numeric keys above WASD.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652449345798144
-    m_Localized: "Bullets are fired automatically, and right-click to fire a penetrating
-      missile. Missiles can be used after they are acquired.\r"
+    m_Localized: 'Bullets are fired automatically, and right-click to fire a penetrating
+      missile. Missiles can be used after they are acquired.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652468773814272
@@ -241,51 +245,78 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 652480735969280
-    m_Localized: "When removing enemies, items are summoned at regular intervals
+    m_Localized: 'When removing enemies, items are summoned at regular intervals
       to prepare for enemy offensives. Items appear when you remove a certain level
-      of enemies.\r"
+      of enemies.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652495642525696
-    m_Localized: "In addition, the types of items are classified according to how
+    m_Localized: 'In addition, the types of items are classified according to how
       they are used. The next item is an item whose effect is applied immediately
-      upon acquisition.\r"
+      upon acquisition.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652509370482688
-    m_Localized: "(1) Signal jammer (delayed recall time of enemies)\n(2) stamina
-      (restoring player's stamina)\n(3) missile (fire through missile that projects
-      strong attack)\r"
+    m_Localized: '(1) Signal jammer (delayed recall time of enemies)
+
+      (2) Health
+      (restoring player''s health)
+
+      (3) missile (fire through missile that
+      projects strong attack)
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652523232657408
-    m_Localized: "The following items can be used when you want after the acquisition.
-      Items acquired can disappear when they are hit by enemies.\r"
+    m_Localized: 'The following items can be used when you want after the acquisition.
+      Items acquired can disappear when they are hit by enemies.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652549702909952
-    m_Localized: "(1) Rush (Deploying Rushing Damage to General Enemy)\n(2) Shield
-      (Void All Damage)\n(3) Gravity Shot (Outcast After Attracting Enemy)\r"
+    m_Localized: '(1) Rush (Deploying Rushing Damage to General Enemy)
+
+      (2)
+      Shield (Void All Damage)
+
+      (3) Gravity Shot (Outcast After Attracting
+      Enemy)
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652574180868096
-    m_Localized: "Enemies call the boss with sequence. Removing the boss will allow
-      you to upgrade the skills you use.\r"
+    m_Localized: 'Enemies call the boss with sequence. Removing the boss will allow
+      you to upgrade the skills you use.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652593353031680
-    m_Localized: "One of the bosses has a beacon on the mother ship. Keep removing
-      the boss, get to the mother ship if you get in touch with it.\r"
+    m_Localized: 'One of the bosses has a beacon on the mother ship. Keep removing
+      the boss, get to the mother ship if you get in touch with it.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652603050262528
-    m_Localized: "Item, boss, its position is shown on radar. However, the mothership
-      is only annouced with its distance due to beacon performance.\r"
+    m_Localized: 'Item, boss, its position is shown on radar. However, the mothership
+      is only annouced with its distance due to beacon performance.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 652621924630528
-    m_Localized: "Check the status message frequently to inform you of the changes
-      around you that are displayed here. Then, let's get started.\r"
+    m_Localized: 'Check the status message frequently to inform you of the changes
+      around you that are displayed here. Then, let''s get started.
+
+'
     m_Metadata:
       m_Items: []
   - m_Id: 708193810219008
