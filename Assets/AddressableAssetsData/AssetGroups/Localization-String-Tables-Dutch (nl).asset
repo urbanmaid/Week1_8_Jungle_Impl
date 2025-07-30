@@ -14,13 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_GroupName: Localization-String-Tables-Dutch (nl)
   m_GUID: 1693228be0ece33468c5f0ab182133a2
-  m_SerializeEntries:
-  - m_GUID: d9bc6aeb5dc7ba14e8c42c587364be58
-    m_Address: DefaultLocaleTable_nl
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-nl
-    FlaggedDuringContentUpdateRestriction: 0
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: d1cca3aa4b5a42840a058ff7551d8591, type: 2}
   m_SchemaSet:

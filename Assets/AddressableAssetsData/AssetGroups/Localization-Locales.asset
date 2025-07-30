@@ -27,50 +27,14 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 21bec127b944f0241836dd7e43ede707
-    m_Address: Dutch (nl)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 29ac41a0b7bba1b4aaef0d0e8f2f637b
-    m_Address: Spanish (es)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2cf10f6c619c2bc46a061682445ac079
-    m_Address: German (de)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2e5a0c1e5d795d54ca32afe853872b76
-    m_Address: Portuguese (pt)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 80e15ff1d915d5546a8120c6c6333f9d
     m_Address: Chinese (Simplified) (zh-CN)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a5f49e8be7c8a1b4c8a69e8759ac9b77
-    m_Address: Italian (it)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e2410c89daa863c4ea115821f4f694d6
     m_Address: Chinese (Traditional) (zh-TW)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: e8eea89cf2796a046b84262a62cfc059
-    m_Address: French (fr)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale

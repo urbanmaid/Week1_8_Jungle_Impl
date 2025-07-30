@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-String-Tables-Italian (it)
+  m_Name: Localization-String-Tables-Indonesian (id)
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-String-Tables-Italian (it)
-  m_GUID: c195f54f9a69ce54dab4ec8172dc1e28
+  m_GroupName: Localization-String-Tables-Indonesian (id)
+  m_GUID: 8de1f1283205f9745b656dd1e420917b
   m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: d1cca3aa4b5a42840a058ff7551d8591, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 2309b768aefef0d4dace2637745d6f62, type: 2}
-    - {fileID: 11400000, guid: fecd828b5b9b0884ea9ddd75bd181af5, type: 2}
+    - {fileID: 11400000, guid: d01698357bb210b4c83ad6576b36e4aa, type: 2}
+    - {fileID: 11400000, guid: 0428d46ea69dcfc419a410229f0eae68, type: 2}
