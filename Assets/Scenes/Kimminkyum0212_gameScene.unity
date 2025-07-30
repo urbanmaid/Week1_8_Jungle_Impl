@@ -510,7 +510,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "\uBBF8\uC0AC\uC77C \uD30C\uAD34\uB825"
+          m_StringArgument: UI.Upgrade.Missile
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &126506354
@@ -5426,14 +5426,45 @@ MonoBehaviour:
   scoreCutIntermediate: 500
   scoreCutPro: 1000
   gameoverEvalText: {fileID: 843981762}
-  quoteRookie: "\uC774 \uACF5\uD5C8\uD55C \uACF3\uC5D0\uC11C \uC0B4\uC544\uB0A8\uAE30
-    \uC704\uD574\uC11C\uB294 \uB354 \uC5F0\uC2B5\uD558\uB294 \uAC83\uC774 \uC88B\uC2B5\uB2C8\uB2E4."
-  quoteAmateur: "\uC801\uC5B4\uB3C4 1\uC778\uBD84 \uC815\uB3C4\uB294 \uD558\uB2E4\uB9CC,
-    \uBB54\uAC00 \uD5C8\uC804\uD55C \uB290\uB08C\uC774\uB124\uC694."
-  quoteIntermediate: "\uC774 \uC815\uB3C4\uB294 \uB418\uC5B4\uC57C Factor8\uC758
-    \uC77C\uC6D0\uC784\uC744 \uC99D\uBA85\uD560 \uC218 \uC788\uAD70\uC694."
-  quotePro: "\uB2F9\uC2E0\uC774 \uD639\uC2DC 20\uAE30\uC218\uC5D0 \uD55C \uBC88 \uB098\uC624\uB294
-    \uC6B0\uC8FC\uC0AC\uAD00\uD559\uAD50 \uC218\uC11D \uC878\uC5C5\uC0DD\uC774\uC168\uB098\uC694?"
+  quoteRookie:
+    m_TableReference:
+      m_TableCollectionName: GUID:048d12dad0a97f44094530d24180390f
+    m_TableEntryReference:
+      m_KeyId: 592941873463296
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  quoteAmateur:
+    m_TableReference:
+      m_TableCollectionName: GUID:048d12dad0a97f44094530d24180390f
+    m_TableEntryReference:
+      m_KeyId: 593030511689728
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  quoteIntermediate:
+    m_TableReference:
+      m_TableCollectionName: GUID:048d12dad0a97f44094530d24180390f
+    m_TableEntryReference:
+      m_KeyId: 593080646205440
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  quotePro:
+    m_TableReference:
+      m_TableCollectionName: GUID:048d12dad0a97f44094530d24180390f
+    m_TableEntryReference:
+      m_KeyId: 593096706195456
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  references:
+    version: 2
+    RefIds: []
 --- !u!4 &702879927
 Transform:
   m_ObjectHideFlags: 0
@@ -6715,7 +6746,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "\uC2A4\uD0AC \uD30C\uC6CC"
+          m_StringArgument: UI.Upgrade.Skillpower
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &889427798
@@ -15438,7 +15469,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: "\uCD1D\uD0C4 \uBC1C\uC0AC \uC18D\uB3C4"
+          m_StringArgument: UI.Upgrade.Firerate
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1940523700

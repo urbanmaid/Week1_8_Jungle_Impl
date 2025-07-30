@@ -107,6 +107,158 @@ MonoBehaviour:
     m_Key: UI.Clear.Continue
     m_Metadata:
       m_Items: []
+  - m_Id: 592941873463296
+    m_Key: Reputation.Rookie
+    m_Metadata:
+      m_Items: []
+  - m_Id: 593030511689728
+    m_Key: Reputation.Amat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 593080646205440
+    m_Key: Reputation.Inter
+    m_Metadata:
+      m_Items: []
+  - m_Id: 593096706195456
+    m_Key: Reputation.Pro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597126610255872
+    m_Key: "Msg.Intro\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597147657273344
+    m_Key: "Msg.ItemNotification\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597180607725568
+    m_Key: "Msg.ItemAccess.Health\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597200555835392
+    m_Key: Msg.ItemAccess.Missile
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597220843683840
+    m_Key: "Msg.ItemAccess.Jammer\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597252342906880
+    m_Key: "Msg.UsingItem.Rush\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597276288188416
+    m_Key: "Msg.UsingItem.Shield\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 597292117491712
+    m_Key: "Msg.UsingItem.Blackhole\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615321685557248
+    m_Key: "Msg.DoneUpgrade.Missile\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615351867768832
+    m_Key: "Msg.DoneUpgrade.Firerate\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615369961996288
+    m_Key: "Msg.DoneUpgrade.Skillpower\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615385996820480
+    m_Key: "Msg.Warning.Swarm\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615395740188672
+    m_Key: "Msg.Warning.Ballistic\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615407379382272
+    m_Key: "Msg.Warning.Boss\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615411032621056
+    m_Key: "Msg.Alert.OutofRescueRange\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615423108022272
+    m_Key: "Msg.Alert.AffectedBlackhole\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615440757653504
+    m_Key: "Msg.Alert.HealthIssue\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615452640116736
+    m_Key: "Msg.Boss.LetFinish\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615464136704000
+    m_Key: "Msg.Boss.CompleteFinish\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615475176112128
+    m_Key: "Msg.Mothership.InRescueRange\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615486886608896
+    m_Key: "Msg.Mothership.ReachTo\r"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 615496319598592
+    m_Key: Msg.Mothership.Reached
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652401321017344
+    m_Key: Instruction.Fundemental
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652449345798144
+    m_Key: Instruction.FireDirection
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652468773814272
+    m_Key: Instruction.Enemy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652480735969280
+    m_Key: Instruction.Item.Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652495642525696
+    m_Key: Instruction.Item.StoredType
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652509370482688
+    m_Key: Instruction.Item.StoredType.Count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652523232657408
+    m_Key: Instruction.Item.ActiveType
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652549702909952
+    m_Key: Instruction.Item.ActiveType.Count
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652574180868096
+    m_Key: Instruction.Boss
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652593353031680
+    m_Key: Instruction.Beacon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652603050262528
+    m_Key: Instruction.Radar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 652621924630528
+    m_Key: Instruction.Message
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -2,9 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
-using UnityEngine.Rendering;
 using System;
 using System.Collections;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Tables;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 
 public class UIManager : MonoBehaviour
 {
@@ -36,6 +40,7 @@ public class UIManager : MonoBehaviour
 
     private int upgradeCode;
     private string upgradeStringInit;
+    private LocalizedString upgradeStringEntry;
     private float time;
     private int min;
     private int sec;
@@ -46,10 +51,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] int scoreCutIntermediate = 500;
     [SerializeField] int scoreCutPro = 1000;
     [SerializeField] TextMeshProUGUI gameoverEvalText;
-    [SerializeField] string quoteRookie;
-    [SerializeField] string quoteAmateur;
-    [SerializeField] string quoteIntermediate;
-    [SerializeField] string quotePro;
+    [SerializeField] LocalizedString quoteRookie;
+    [SerializeField] LocalizedString quoteAmateur;
+    [SerializeField] LocalizedString quoteIntermediate;
+    [SerializeField] LocalizedString quotePro;
     
     void Awake()
     {
@@ -66,7 +71,16 @@ public class UIManager : MonoBehaviour
         min = 0;
         sec = 0;
 
-        upgradeStringInit = upgradeConfirmText.text;
+        // If localizer is set, get its text from localizer
+        LocalizeStringEvent ls = upgradeConfirmText.GetComponent<LocalizeStringEvent>();
+        if (ls)
+        {
+            upgradeStringEntry = ls.StringReference;
+        }
+        else
+        {
+            upgradeStringInit = upgradeConfirmText.text;
+        }
     }
 
     void Update()
@@ -162,7 +176,46 @@ public class UIManager : MonoBehaviour
 
     public void SetUpgradeCodeText(string text)
     {
-        upgradeConfirmText.text = text + upgradeStringInit;
+        StartCoroutine(SetCombinedTextRoutine(text));
+    }
+    
+    private IEnumerator SetCombinedTextRoutine(string itemEntryKey)
+    {
+        // 이 로직은 LocalizeStringEvent를 직접 사용하지 않고 수동으로 텍스트를 설정합니다.
+        // 따라서 컴포넌트가 활성화되어 있다면 잠시 비활성화하여 충돌을 방지하는 것이 안전합니다.
+        var localizeEvent = upgradeConfirmText.GetComponent<LocalizeStringEvent>();
+        if (localizeEvent != null)
+        {
+            localizeEvent.enabled = false;
+        }
+
+        var baseStringHandle = upgradeStringEntry.GetLocalizedStringAsync();
+        yield return baseStringHandle;
+
+        if (baseStringHandle.Status != UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+        {
+            yield break;
+        }
+        string baseText = baseStringHandle.Result;
+
+        var itemString = new LocalizedString
+        {
+            TableReference = LocalizationSettings.StringDatabase.DefaultTable,
+            TableEntryReference = itemEntryKey
+        };
+
+        var itemStringHandle = itemString.GetLocalizedStringAsync();
+        yield return itemStringHandle;
+
+        if (itemStringHandle.Status != UnityEngine.ResourceManagement.AsyncOperations.AsyncOperationStatus.Succeeded)
+        {
+            Debug.LogError($"'{itemEntryKey}' 키를 로드하는 데 실패했습니다. 키가 테이블에 존재하는지 확인하세요.");
+            upgradeConfirmText.text = $"{baseText}: {itemEntryKey}";
+            yield break;
+        }
+        string itemText = itemStringHandle.Result;
+
+        upgradeConfirmText.text = $"{baseText}: {itemText}";
     }
 
     public void ConfirmUpgrade()
@@ -198,7 +251,7 @@ public class UIManager : MonoBehaviour
         GameManager.instance.isDamagable = false;
         StartCoroutine(GameManager.instance.ResetDamagable());
 
-        statusAnnouncer.ActivateAnnoucer(8+upgradeCode);
+        statusAnnouncer.ActivateAnnoucer(8 + upgradeCode);
         GameManager.instance.AddPhase();
     }
 
@@ -215,22 +268,27 @@ public class UIManager : MonoBehaviour
 
     private void EvaulateScore()
     {
+        LocalizedString evaluationString;
+
         if (gm.scoreTotal < scoreCutAmateur)
         {
-            gameoverEvalText.text = quoteRookie;
+            evaluationString = quoteRookie;
         }
         else if (gm.scoreTotal < scoreCutIntermediate)
         {
-            gameoverEvalText.text = quoteAmateur;
+            evaluationString = quoteAmateur;
         }
         else if (gm.scoreTotal < scoreCutPro)
         {
-            gameoverEvalText.text = quoteIntermediate;
+            evaluationString = quoteIntermediate;
         }
         else
         {
-            gameoverEvalText.text = quotePro;
+            evaluationString = quotePro;
         }
+
+        // Set evaluation text
+        gameoverEvalText.text = evaluationString.GetLocalizedStringAsync().Result;
     }
 
     public void Restart()
