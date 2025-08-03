@@ -335,6 +335,40 @@ MonoBehaviour:
     m_Localized: Language
     m_Metadata:
       m_Items: []
+  - m_Id: 2169113233162240
+    m_Localized: You were a member of the Special Forces Factor 8 of the Galactic
+      Republic.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169114487259136
+    m_Localized: The militarist forces that attacked you have removed all your comrades.
+      You are now alone.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169184465027072
+    m_Localized: Fortunately, a rescue bus will come to you through the distress
+      signal sent by Factor 8.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169215209275392
+    m_Localized: But the rescue bus is slow, and you can't get right to where you
+      are.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169224319303680
+    m_Localized: So you have to survive the militarist forces for the rescue to come.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169232187817984
+    m_Localized: The assets left by a colleague of Factor 8, who fought with you,
+      who fell to militaristic forces, may help.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2169239523655680
+    m_Localized: Make the most of the debris items you get from removing enemies,
+      meet with relief after surviving enemy attacks.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
