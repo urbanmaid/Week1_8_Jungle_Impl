@@ -85,8 +85,10 @@ public class BossEnemy : EnemyController
         transform.GetChild(0).gameObject.SetActive(false);
         GetComponent<Collider2D>().enabled = false;
         if (enemyRb) enemyRb.simulated = false;
-        
-        if (bossSkillFX) bossSkillFX.SetActive(false);
+        if (bossSkillFX) Destroy(bossSkillFX);
+
+        // Brake
+        moveSpeed = 0;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

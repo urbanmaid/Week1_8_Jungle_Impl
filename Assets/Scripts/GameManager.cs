@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
         if (curHealth <= 0)
         {
             isPlaying = false;
-            player.SetActive(false);
+            StartCoroutine(SetPlayerDead());
             StartCoroutine(UIManager.instance.EndGame());
         }
         else if(curHealth < 25){
@@ -126,6 +126,12 @@ public class GameManager : MonoBehaviour
         pc.PlayDamage();
 
         UIManager.instance.UpdateHealth();
+    }
+
+    internal IEnumerator SetPlayerDead()
+    {
+        yield return new WaitForSeconds(1f);
+        player.SetActive(false);
     }
 
     internal IEnumerator ResetDamagable()

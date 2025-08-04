@@ -34,7 +34,7 @@ public class RushBossEnemy : BossEnemy
                     rushDelayElapsed = 0;
                     rushStatus = 1;
 
-                    bossSkillFX.SetActive(true);
+                    if (bossSkillFX) bossSkillFX.SetActive(true);
                     Invoke(nameof(StartRush), bossSkillFXDuration);
                     Invoke(nameof(StopRush), (rushDistance / rushSpeed) + bossSkillFXDuration);
                 }
@@ -53,7 +53,7 @@ public class RushBossEnemy : BossEnemy
     {
         isSteerable = false;
         moveSpeed = rushSpeed;
-        bossSkillFX.SetActive(false);
+        if (bossSkillFX) bossSkillFX.SetActive(false);
     }
 
     private void StopRush()

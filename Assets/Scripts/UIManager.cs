@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [Header("Gameplay")]
     public static UIManager instance;
     private GameManager gm;
+    [SerializeField] AudioSource audioSource;
     [SerializeField] TextMeshProUGUI healthText, missileText, scoreText, timerText, phaseText;
     [SerializeField] TextMeshProUGUI moveLvlText, attackLvlText, skillLvlText;
     [SerializeField] TextMeshProUGUI skillRushText, skillShieldText, skillGravityShotText;
@@ -60,6 +61,11 @@ public class UIManager : MonoBehaviour
 
     [Header("Settings")]
     [SerializeField] TMP_Dropdown languageDropdown;
+
+    [Header("UI Sounds")]
+    [SerializeField] AudioClip clipUISelect;
+    [SerializeField] AudioClip clipUIConfirm;
+
     private bool isInitialized;
 
     #region Default Func
@@ -162,6 +168,8 @@ public class UIManager : MonoBehaviour
         gm.managers.SetActive(true);
         ingamePlayPanel.SetActive(true);
         Invoke(nameof(StartAnnouce), 2f);
+
+        PlayUIAudioClip(clipUIConfirm);
     }
 
     private void StartAnnouce()
@@ -190,6 +198,7 @@ public class UIManager : MonoBehaviour
     public void SetUpgradeCode(int code)
     {
         upgradeCode = code;
+        PlayUIAudioClip(clipUISelect);
     }
 
     public void SetUpgradeCodeText(string text)
@@ -271,6 +280,8 @@ public class UIManager : MonoBehaviour
 
         statusAnnouncer.ActivateAnnoucer(8 + upgradeCode);
         GameManager.instance.AddPhase();
+
+        PlayUIAudioClip(clipUIConfirm);
     }
 
     #endregion
@@ -376,7 +387,9 @@ public class UIManager : MonoBehaviour
 
         // Load Languages
         // languageDropdown에 프로젝트에 있는 로캘 목록을 추가하기
-        if(!isInitialized && (languageDropdown != null)) StartCoroutine(SetupLocalesRoutine());
+        if (!isInitialized && (languageDropdown != null)) StartCoroutine(SetupLocalesRoutine());
+
+        PlayUIAudioClip(clipUISelect);
     }
 
     private IEnumerator SetupLocalesRoutine()
@@ -440,6 +453,24 @@ public class UIManager : MonoBehaviour
     {
         startPanel.SetActive(true);
         settingsPanel.SetActive(false);
+
+        PlayUIAudioClip(clipUISelect);
+    }
+
+    public void PlayUISelect()
+    {
+        PlayUIAudioClip(clipUISelect);
+    }
+
+    public void PlayUIConfirm()
+    {
+        PlayUIAudioClip(clipUIConfirm);
+    }
+
+    void PlayUIAudioClip(AudioClip clip)
+    {
+        if (audioSource == null || clip == null) return;
+        audioSource.PlayOneShot(clip);
     }
 
     #endregion

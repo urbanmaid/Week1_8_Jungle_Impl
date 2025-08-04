@@ -51,30 +51,38 @@ public class DialoguePresenter : MonoBehaviour
         // Set text and sprite
         StartCoroutine(UpdateDialogue());
         RefreshDialogueSprite();
+
+        UIManager.instance.PlayUIConfirm();
     }
 
     public void DialogueControlPrev()
     {
-        if(diagContentIndex > 0)
+        if (diagContentIndex > 0)
         {
             diagContentIndex -= 1;
             RefreshDialogueSprite();
             StartCoroutine(UpdateDialogue());
         }
+
+        UIManager.instance.PlayUISelect();
     }
 
     public void DialogueControlNext()
     {
-        if(diagContentIndex < diagContentLength - 1)
+        if (diagContentIndex < diagContentLength - 1)
         {
             diagContentIndex += 1;
             RefreshDialogueSprite();
             StartCoroutine(UpdateDialogue());
+
+            UIManager.instance.PlayUISelect();
         }
-        else
+        else // End of Page
         {
             actionNext.Invoke();
             CloseDialogue();
+
+            //UIManager.instance.PlayUIConfirm();
         }
     }
 

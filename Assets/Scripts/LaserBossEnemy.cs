@@ -49,9 +49,9 @@ public class LaserBossEnemy : BossEnemy
 
     IEnumerator FireLaser()
     {
-        bossSkillFX.SetActive(true);
+        if (bossSkillFX) bossSkillFX.SetActive(true);
         yield return new WaitForSeconds(bossSkillFXDuration);
-        bossSkillFX.SetActive(false);
+        if (bossSkillFX) bossSkillFX.SetActive(false);
 
         Vector2 targetPosition = player.transform.position;
         targetDirection = (targetPosition - (Vector2)transform.position).normalized;
