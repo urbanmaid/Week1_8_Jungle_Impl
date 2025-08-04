@@ -121,6 +121,10 @@ public class GameManager : MonoBehaviour
             curHealth = maxHealth;
         }
 
+        // Get Player and play damage sound FX
+        PlayerController pc = GameManager.instance.player.GetComponent<PlayerController>();
+        pc.PlayDamage();
+
         UIManager.instance.UpdateHealth();
     }
 

@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using Unity.Mathematics;
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private Collider2D col;
     private SpriteRenderer rend;
     private Rigidbody2D playerRb;
+    private PlayerSoundController playerSoundController;
 
     [Header("Player Movement")]
     public float moveSpeed;
@@ -65,8 +65,10 @@ public class PlayerController : MonoBehaviour
         mainCam = Camera.main;
         isRushing = false;
         curSpeed = moveSpeed;
+
         col = GetComponent<Collider2D>();
         rend = GetComponent<SpriteRenderer>();
+        playerSoundController = GetComponent<PlayerSoundController>();
     }
 
     void Update()
@@ -74,11 +76,11 @@ public class PlayerController : MonoBehaviour
         if (gm.isPlaying)
         {
             Move();
-            
+
             ProjectileUsage();
             SkillUsage();
-        } 
-        else 
+        }
+        else
         {
             playerRb.linearVelocity = Vector2.zero;
         }
@@ -86,7 +88,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if(!isRushing)
+        if (!isRushing)
         {
             Vector3 mousePos = Input.mousePosition;
             Vector3 worldPos = mainCam.WorldToScreenPoint(transform.localPosition);
@@ -125,11 +127,13 @@ public class PlayerController : MonoBehaviour
     {
         Instantiate(projectilePrefab, transform.position, Quaternion.Euler(launchDirection + playerSprite.transform.rotation.eulerAngles));
         coolDown = fireRate;
+
+        //playerSoundController?.PlayShooting();
     }
 
     private IEnumerator LaunchMissile()
     {
-        if(gm.missileAmount <= 0)
+        if (gm.missileAmount <= 0)
         {
             yield break;
         }
@@ -144,6 +148,8 @@ public class PlayerController : MonoBehaviour
             Instantiate(missilePrefab, transform.position, Quaternion.Euler(launchDirection + playerSprite.transform.rotation.eulerAngles));
 
             gm.NotifyMissileUsed();
+
+            playerSoundController?.PlayShootingMissile();
         }
     }
 
@@ -151,7 +157,8 @@ public class PlayerController : MonoBehaviour
     void SkillUsage()
     {
         // Skill Usage
-        if(!isUsingSkill){
+        if (!isUsingSkill)
+        {
             if (Input.GetButtonDown("Skill1") && gm.skillRush > 0)
             {
                 UIManager.instance.ActivateAnnoucer(5);
@@ -186,6 +193,8 @@ public class PlayerController : MonoBehaviour
             isRushing = true;
             gm.ToggleShakeCamera(true);
 
+            playerSoundController?.PlaySkillBoost();
+
             // Affecting physics
             playerRb.linearVelocity = offset.normalized * rushingSpeed;
             gm.isDamagable = false;
@@ -213,12 +222,14 @@ public class PlayerController : MonoBehaviour
         {
             isShielded = true;
             shield.SetActive(true);
+            playerSoundController?.PlaySkillShield();
+
             StartCoroutine(FXShieldCo());
         }
     }
     IEnumerator FXShieldCo()
     {
-        yield return new WaitForSeconds(2.5f + (0.5f* skillPower));
+        yield return new WaitForSeconds(2.5f + (0.5f * skillPower));
         isShielded = false;
         shield.SetActive(false);
 
@@ -234,6 +245,8 @@ public class PlayerController : MonoBehaviour
         Invoke(nameof(StopUsingSkill), 0.8f);
 
         gravShot.transform.GetChild(0).GetComponent<BlackHole>().SetGravityPower(skillPower);
+
+        playerSoundController?.PlaySkillGravity();
     }
 
     private void StopUsingSkill()
@@ -249,6 +262,12 @@ public class PlayerController : MonoBehaviour
             collision.gameObject.GetComponent<EnemyController>().Damage(8f + (4f * skillPower));
             Instantiate(projectileParticle, transform.position, Quaternion.identity);
             //Debug.Log(8f + (4f * skillPower));
+
         }
+    }
+
+    public void PlayDamage()
+    {
+        playerSoundController?.PlayDamaged();
     }
 }

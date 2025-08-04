@@ -53,8 +53,6 @@ public class LaserBossEnemy : BossEnemy
         yield return new WaitForSeconds(bossSkillFXDuration);
         bossSkillFX.SetActive(false);
 
-       
-
         Vector2 targetPosition = player.transform.position;
         targetDirection = (targetPosition - (Vector2)transform.position).normalized;
         laserDistance = 0f;
@@ -116,6 +114,15 @@ public class LaserBossEnemy : BossEnemy
             var angle = Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg;
             laser.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
         }
+    }
+
+    protected override void SetDestroy()
+    {
+        base.SetDestroy();
+
+        // Delete laser
+        Destroy(laser);
+        laser = null;
     }
 
     private void OnDestroy()

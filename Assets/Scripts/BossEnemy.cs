@@ -44,9 +44,9 @@ public class BossEnemy : EnemyController
         health -= dmgAmount;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            PlayAudioClip(clipDestroy);
 
-            //interaction with game manager
+            // Interaction with game manager
             GameManager.instance.bossSpawnManager.enableBossSpawn();
             GameManager.instance.IncreaseScore(enemyScore);
 
@@ -54,8 +54,16 @@ public class BossEnemy : EnemyController
             UIManager.instance.ActivateAnnoucer(18);
 
             gm.player.GetComponent<PlayerInterfaceController>().SetBossNotifier(false);
+            SetDestroy();
+
+            Destroy(gameObject, clipDestroy ? clipDestroy.length : 0);
         }
-        else if ((health <= 20) && (initHealth > initHealthAnnounceCriterion))
+        else
+        {
+            PlayAudioClip(clipDamage);
+        }
+
+        if ((health <= 20) && (initHealth > initHealthAnnounceCriterion))
         {
             UIManager.instance.ActivateAnnoucer(17);
         }
@@ -71,12 +79,25 @@ public class BossEnemy : EnemyController
         }
     }
 
+    protected virtual void SetDestroy()
+    {
+        // Off
+        transform.GetChild(0).gameObject.SetActive(false);
+        GetComponent<Collider2D>().enabled = false;
+        if (enemyRb) enemyRb.simulated = false;
+        
+        if (bossSkillFX) bossSkillFX.SetActive(false);
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player")){
+        if (collision.CompareTag("Player"))
+        {
             PlayerController pc = collision.GetComponent<PlayerController>();
-            if(!pc.isShielded){ // Only damagable when shielded
-                if(pc.isRushing){
+            if (!pc.isShielded)
+            { // Only damagable when shielded
+                if (pc.isRushing)
+                {
                     gm.DamagePlayer(collisionDamage / 3f);
                 }
                 else

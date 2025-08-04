@@ -36,10 +36,10 @@ public class RushBossEnemy : BossEnemy
 
                     bossSkillFX.SetActive(true);
                     Invoke(nameof(StartRush), bossSkillFXDuration);
-                    Invoke(nameof(StopRush), (rushDistance/rushSpeed) + bossSkillFXDuration);
+                    Invoke(nameof(StopRush), (rushDistance / rushSpeed) + bossSkillFXDuration);
                 }
 
-                if(isSteerable)
+                if (isSteerable)
                 {
                     Steer();
                 }

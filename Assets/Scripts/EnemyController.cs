@@ -34,6 +34,12 @@ public class EnemyController : MonoBehaviour
     [Header("Score")]
     [SerializeField] protected int enemyScore = 1;
 
+    [Header("Sound")]
+    [SerializeField] protected AudioClip clipDamage;
+    [SerializeField] protected AudioClip clipDestroy;
+    [SerializeField] protected AudioClip clipProjectileLaunch;
+    [SerializeField] protected AudioSource audioSource;
+
     private ItemSpawnConditionManager itemSpawnConditionManager;
 
     protected virtual void Start()
@@ -41,10 +47,13 @@ public class EnemyController : MonoBehaviour
         enemyRb = GetComponent<Rigidbody2D>();
         player = GameObject.Find("Player");
         itemSpawnConditionManager = ItemSpawnConditionManager.instance;
-        if(itemSpawnConditionManager == null){
+        if (itemSpawnConditionManager == null)
+        {
             Debug.LogError("ItemSpawnConditionManager is not found.");
         }
+
         gm = GameManager.instance;
+        if(audioSource == null) audioSource = GetComponent<AudioSource>();
 
         // For someone which is not steerable
         Steer();
@@ -56,7 +65,7 @@ public class EnemyController : MonoBehaviour
         if (gm.isPlaying)
         {
             //Enemy movement and rotation
-            if(isSteerable)
+            if (isSteerable)
             {
                 Steer();
             }
@@ -79,12 +88,13 @@ public class EnemyController : MonoBehaviour
                     DoRepeativeShoot();
                 }
             }
-            else {
+            else
+            {
                 enemyRb.linearVelocity = moveDir.normalized * moveSpeed;
             }
 
             // Destroy enemy if it is out of available range
-            if(distance > availableRange)
+            if (distance > availableRange)
             {
                 Destroy(gameObject);
             }
@@ -98,7 +108,8 @@ public class EnemyController : MonoBehaviour
 
     protected void Steer()
     {
-        if(player){
+        if (player)
+        {
             moveDir = player.transform.position - transform.position;
         }
         angle = Mathf.Atan2(moveDir.y, moveDir.x) * Mathf.Rad2Deg;
@@ -117,7 +128,7 @@ public class EnemyController : MonoBehaviour
         {
             fireRateInterval -= Time.deltaTime;
         }
-        else 
+        else
         {
             Shoot();
             fireRateInterval = fireRate;
@@ -129,11 +140,26 @@ public class EnemyController : MonoBehaviour
         health -= dmgAmount;
         if (health <= 0)
         {
-            Destroy(gameObject);
+            health = -1;
+
+            PlayAudioClip(clipDestroy);
+
+            //GetComponent<SpriteRenderer>().enabled = false;
+            // Sprite is applied as children of object so turn off like this
+            transform.GetChild(0).gameObject.SetActive(false);
+            GetComponent<Collider2D>().enabled = false;
+            enemyRb.simulated = false;
+
             InstantiateItem(transform.position);
             GameManager.instance.IncreaseScore(enemyScore);
+
+            Destroy(gameObject, clipDestroy ? clipDestroy.length : 0);
         }
-    }
+        else
+        {
+            PlayAudioClip(clipDamage);
+        }
+}
 
     private void InstantiateItem(Vector3 targetPosition)
     {
@@ -149,12 +175,13 @@ public class EnemyController : MonoBehaviour
     //used object pooling for projectile spawning and despawning
     private void Shoot()
     {
-        Instantiate(projectile, transform.position, transform.rotation);        
+        Instantiate(projectile, transform.position, transform.rotation);
+        PlayAudioClip(clipProjectileLaunch);
     }
 
-   protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player") 
+        if (collision.CompareTag("Player")
         && !player.GetComponent<PlayerController>().isShielded
         && !player.GetComponent<PlayerController>().isRushing)
         // Player should not be in shield or rushing status for damaging
@@ -162,6 +189,11 @@ public class EnemyController : MonoBehaviour
             gm.DamagePlayer(collisionDamage);
             Destroy(gameObject);
         }
+    }
+
+    protected void PlayAudioClip(AudioClip clip)
+    {
+        if(clip != null) audioSource.PlayOneShot(clip);
     }
 }
 
