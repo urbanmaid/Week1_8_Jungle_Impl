@@ -49,6 +49,7 @@ MonoBehaviour:
   itemCode: 10
   healMount: 10
   buffAmount: 1
+  clipAccessed: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
 --- !u!58 &367927551905419508
 CircleCollider2D:
   m_ObjectHideFlags: 0

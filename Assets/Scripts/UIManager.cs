@@ -473,5 +473,10 @@ public class UIManager : MonoBehaviour
         audioSource.PlayOneShot(clip);
     }
 
+    public void PlayUIClip(AudioClip clip)
+    {
+        PlayUIAudioClip(clip);
+    }
+
     #endregion
 }

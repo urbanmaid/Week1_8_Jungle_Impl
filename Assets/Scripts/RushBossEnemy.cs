@@ -51,9 +51,14 @@ public class RushBossEnemy : BossEnemy
 
     private void StartRush()
     {
+        if (health <= 0) return;
+        
         isSteerable = false;
         moveSpeed = rushSpeed;
         if (bossSkillFX) bossSkillFX.SetActive(false);
+
+        // Play laser sound
+        PlayAudioClip(clipProjectileLaunch);
     }
 
     private void StopRush()

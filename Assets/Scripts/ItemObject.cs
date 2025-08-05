@@ -14,6 +14,7 @@ public class ItemObject : MonoBehaviour
 
     [SerializeField] float healMount = 10f;
     [SerializeField] int buffAmount = 4;
+    [SerializeField] AudioClip clipAccessed;
 
     private void Start()
     {
@@ -35,8 +36,9 @@ public class ItemObject : MonoBehaviour
         {
             Debug.Log("Item has been picked up.");
             ItemEffect();
-            
-            if(itemSpawnConditionManager){
+
+            if (itemSpawnConditionManager)
+            {
                 itemSpawnConditionManager.SetIsSpawned(false); // Reset status of isSpawned
             }
             instances.Remove(this);
@@ -44,6 +46,8 @@ public class ItemObject : MonoBehaviour
 
             // Disable item notifier due to item has been picked up
             playerInterfaceController.SetItemObjectInInstances();
+
+            UIManager.instance.PlayUIClip(clipAccessed);
             //playerInterfaceController.SetItemNotifier(false);
         }
     }

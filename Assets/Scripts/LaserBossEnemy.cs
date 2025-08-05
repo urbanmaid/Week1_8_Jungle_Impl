@@ -58,9 +58,13 @@ public class LaserBossEnemy : BossEnemy
         laserDistance = 0f;
 
         // Create laser
-        if(canFire)
+        if (canFire)
         {
             laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            
+            // Play laser sound
+            PlayAudioClip(clipProjectileLaunch);
+
             canFire = false;
         }
         laser.transform.localScale = new Vector3(0.5f, 0f, 1f);
@@ -119,6 +123,8 @@ public class LaserBossEnemy : BossEnemy
     protected override void SetDestroy()
     {
         base.SetDestroy();
+
+        canFire = false;
 
         // Delete laser
         Destroy(laser);

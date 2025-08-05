@@ -130,7 +130,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            Shoot();
+            if(health > 0) Shoot();
             fireRateInterval = fireRate;
         }
     }

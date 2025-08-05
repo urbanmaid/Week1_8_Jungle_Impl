@@ -60,7 +60,7 @@ MonoBehaviour:
   isShootingBeforeRange: 0
   enemyScore: 1
   clipDamage: {fileID: 8300000, guid: b90fcbc08de3c26438d2c4020f210eff, type: 3}
-  clipDestroy: {fileID: 8300000, guid: 262ba8abe5e236a40841600d2c12d9c2, type: 3}
+  clipDestroy: {fileID: 8300000, guid: b90fcbc08de3c26438d2c4020f210eff, type: 3}
   clipProjectileLaunch: {fileID: 8300000, guid: b90fcbc08de3c26438d2c4020f210eff, type: 3}
   audioSource: {fileID: 5418279055413118166}
 --- !u!58 &7384792227603043670

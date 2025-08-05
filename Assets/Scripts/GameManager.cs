@@ -96,8 +96,12 @@ public class GameManager : MonoBehaviour
     public void DamagePlayer(float damage)
     {
         if(isDamagable){
-            if(damage > 0 && !player.GetComponent<PlayerController>().isShielded){
+            if (damage > 0 && !player.GetComponent<PlayerController>().isShielded)
+            {
                 cameraController.ShakeCamera();
+                
+                PlayerController pc = player.GetComponent<PlayerController>();
+                pc.PlayDamage();
             }
             curHealth -= damage;
             curHealth = (int)curHealth;
@@ -120,10 +124,6 @@ public class GameManager : MonoBehaviour
             //Debug.Log("Health Overflow detected, resetting health to max.");
             curHealth = maxHealth;
         }
-
-        // Get Player and play damage sound FX
-        PlayerController pc = GameManager.instance.player.GetComponent<PlayerController>();
-        pc.PlayDamage();
 
         UIManager.instance.UpdateHealth();
     }

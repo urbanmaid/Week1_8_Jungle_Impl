@@ -146,9 +146,9 @@ MonoBehaviour:
   range: 20
   isShootingBeforeRange: 0
   enemyScore: 25
-  clipDamage: {fileID: 8300000, guid: 9444a65d5ee915c4ea465d1a85f64dde, type: 3}
+  clipDamage: {fileID: 8300000, guid: b90fcbc08de3c26438d2c4020f210eff, type: 3}
   clipDestroy: {fileID: 8300000, guid: 7e26c9daf4c32483b9c2790e662d3f1b, type: 3}
-  clipProjectileLaunch: {fileID: 0}
+  clipProjectileLaunch: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}
   audioSource: {fileID: 4660508349787559177}
   bossSkillFX: {fileID: 3256157676802918113}
   laserPrefab: {fileID: 5702909733206541825, guid: aa85fe4968c861d40ad286ef2f223a67, type: 3}
@@ -318,7 +318,7 @@ AudioSource:
   m_GameObject: {fileID: 9195407047507399379}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -2003744982998053553, guid: b223fa625efeab94b8c44dd32a084615, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
