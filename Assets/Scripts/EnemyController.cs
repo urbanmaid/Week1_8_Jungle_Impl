@@ -53,7 +53,7 @@ public class EnemyController : MonoBehaviour
         }
 
         gm = GameManager.instance;
-        if(audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
 
         // For someone which is not steerable
         Steer();
@@ -130,7 +130,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            if(health > 0) Shoot();
+            if (health > 0) Shoot();
             fireRateInterval = fireRate;
         }
     }
@@ -142,6 +142,7 @@ public class EnemyController : MonoBehaviour
         {
             health = -1;
 
+            StopAudioClip();
             PlayAudioClip(clipDestroy);
 
             //GetComponent<SpriteRenderer>().enabled = false;
@@ -159,7 +160,7 @@ public class EnemyController : MonoBehaviour
         {
             PlayAudioClip(clipDamage);
         }
-}
+    }
 
     private void InstantiateItem(Vector3 targetPosition)
     {
@@ -191,9 +192,30 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    protected void PlayAudioClip(AudioClip clip)
+    protected void PlayAudioClip(AudioClip clip, float delay = 0f)
     {
-        if(clip != null) audioSource.PlayOneShot(clip);
+        if (clip != null)
+        {
+            if (delay == 0f)
+            {
+                audioSource.PlayOneShot(clip);
+            }
+            else
+            {
+                StartCoroutine(PlayAudioClipDelayed(clip, delay));
+            }
+        }
+    }
+
+    protected void StopAudioClip()
+    {
+        audioSource.Stop();
+    }
+
+    IEnumerator PlayAudioClipDelayed(AudioClip clip,float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        audioSource.PlayOneShot(clip);
     }
 }
 

@@ -12,4 +12,11 @@ public class BlackHoleBossEnemy : BossEnemy
     {
         pointEffector.enabled = isActive;
     }
+
+    protected override void SetDestroy()
+    {
+        base.SetDestroy();
+
+        ActivateBlackHole(false);
+    }
 }

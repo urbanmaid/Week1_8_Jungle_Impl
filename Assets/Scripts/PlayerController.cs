@@ -84,6 +84,8 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.linearVelocity = Vector2.zero;
         }
+
+        PauseUsage();
     }
 
     void Move()
@@ -269,5 +271,13 @@ public class PlayerController : MonoBehaviour
     public void PlayDamage()
     {
         playerSoundController?.PlayDamaged();
+    }
+
+    void PauseUsage()
+    {
+        if (Input.GetButtonDown("Cancel"))
+        {
+            gm.UsePause();
+        }
     }
 }

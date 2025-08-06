@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LaserBossEnemy : BossEnemy
@@ -35,7 +36,7 @@ public class LaserBossEnemy : BossEnemy
         if (canFire && player != null)
         {
             var distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance <= firingDetectingRange)
+            if (distance <= firingDetectingRange && health > 0)
             {
                 StartCoroutine(FireLaser());
             }
@@ -61,10 +62,6 @@ public class LaserBossEnemy : BossEnemy
         if (canFire)
         {
             laser = Instantiate(laserPrefab, transform.position, Quaternion.identity);
-            
-            // Play laser sound
-            PlayAudioClip(clipProjectileLaunch);
-
             canFire = false;
         }
         laser.transform.localScale = new Vector3(0.5f, 0f, 1f);

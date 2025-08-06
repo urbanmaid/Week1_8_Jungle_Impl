@@ -285,6 +285,14 @@ public class UIManager : MonoBehaviour
     }
 
     #endregion
+    #region Pause
+
+    internal void SetPause(bool isPlaying)
+    {
+        ingamePlayPanel.SetActive(isPlaying);
+    }
+
+    #endregion
     #region Gameover
 
     public IEnumerator EndGame()
@@ -477,6 +485,5 @@ public class UIManager : MonoBehaviour
     {
         PlayUIAudioClip(clip);
     }
-
     #endregion
 }

@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public float maxHealth;
     public float curHealth;
     public int curPhase;
-    public bool isPlaying;
+    public bool isPlaying; // IMPORTANT FOR ALL ACTIONS INGAME!
     public bool isScorable;
     public bool isDamagable;
     public int missileAmount;
@@ -247,5 +247,24 @@ public class GameManager : MonoBehaviour
         isPlaying = false;
         Debug.Log("Game Complete!");
         StartCoroutine(UIManager.instance.SetCompleteScreen(true));
+    }
+
+    internal void UsePause(int playing = 0)
+    {
+        // Set Pause Mode
+        if (playing == 1)
+        {
+            isPlaying = true;
+        }
+        else if (playing == -1)
+        {
+            isPlaying = false;
+        }
+        else
+        {
+            isPlaying = !isPlaying;
+        }
+
+        UIManager.instance.SetPause(isPlaying);
     }
 }
