@@ -303,6 +303,14 @@ MonoBehaviour:
     m_Key: Prologue.Plot.006
     m_Metadata:
       m_Items: []
+  - m_Id: 3176569786695680
+    m_Key: UI.Pause.Title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3176611297722368
+    m_Key: UI.Pause.Resume
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

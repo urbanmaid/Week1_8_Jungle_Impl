@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject endPanel;
     [SerializeField] GameObject completePanel;
     [SerializeField] GameObject ingamePlayPanel;
+    [SerializeField] GameObject ingamePausePanel;
     [SerializeField] GameObject settingsPanel;
 
     [Header("Status")]
@@ -65,6 +66,7 @@ public class UIManager : MonoBehaviour
     [Header("UI Sounds")]
     [SerializeField] AudioClip clipUISelect;
     [SerializeField] AudioClip clipUIConfirm;
+    [SerializeField] AudioClip clipUIClear;
 
     private bool isInitialized;
 
@@ -257,7 +259,7 @@ public class UIManager : MonoBehaviour
                 break;
             case 1:
                 //upgrade attack speed
-                gm.player.GetComponent<PlayerController>().fireRate *= 0.8f;
+                gm.player.GetComponent<PlayerController>().fireRate *= 0.85f;
                 attackLvl += 1;
                 attackLvlText.text = "Lv. " + attackLvl;
                 break;
@@ -287,9 +289,12 @@ public class UIManager : MonoBehaviour
     #endregion
     #region Pause
 
-    internal void SetPause(bool isPlaying)
+    public void SetPause(bool isPlaying)
     {
         ingamePlayPanel.SetActive(isPlaying);
+        ingamePausePanel.SetActive(!isPlaying);
+
+        PlayUIAudioClip(isPlaying ? clipUIConfirm : clipUISelect);
     }
 
     #endregion
@@ -364,6 +369,8 @@ public class UIManager : MonoBehaviour
     internal IEnumerator SetCompleteScreen(bool value)
     {
         yield return new WaitForSeconds(1.5f);
+        PlayUIAudioClip(clipUIClear);
+        
         completePanel.SetActive(value);
         scoreTextComplete.text = "" + gm.scoreTotal;
     }
@@ -390,7 +397,7 @@ public class UIManager : MonoBehaviour
     // #Button
     public void SettingsOpen()
     {
-        startPanel.SetActive(false);
+        //startPanel.SetActive(false);
         settingsPanel.SetActive(true);
 
         // Load Languages
@@ -459,7 +466,7 @@ public class UIManager : MonoBehaviour
 
     public void SettingsClose()
     {
-        startPanel.SetActive(true);
+        //startPanel.SetActive(true);
         settingsPanel.SetActive(false);
 
         PlayUIAudioClip(clipUISelect);

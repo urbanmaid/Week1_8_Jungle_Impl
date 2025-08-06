@@ -390,6 +390,14 @@ MonoBehaviour:
       \uAD6C\uD638 \uBD80\uB300\uC640 \uB9CC\uB098\uC138\uC694."
     m_Metadata:
       m_Items: []
+  - m_Id: 3176569786695680
+    m_Localized: "\uC77C\uC2DC\uC815\uC9C0"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3176611297722368
+    m_Localized: "\uACC4\uC18D\uD558\uAE30"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

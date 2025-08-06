@@ -369,6 +369,14 @@ MonoBehaviour:
       meet with relief after surviving enemy attacks.
     m_Metadata:
       m_Items: []
+  - m_Id: 3176569786695680
+    m_Localized: Pause
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3176611297722368
+    m_Localized: Resume
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

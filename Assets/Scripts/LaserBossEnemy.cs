@@ -36,7 +36,7 @@ public class LaserBossEnemy : BossEnemy
         if (canFire && player != null)
         {
             var distance = Vector2.Distance(transform.position, player.transform.position);
-            if (distance <= firingDetectingRange && health > 0)
+            if (distance <= firingDetectingRange && health > 0 && gm.isPlaying)
             {
                 StartCoroutine(FireLaser());
             }

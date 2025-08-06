@@ -249,7 +249,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(UIManager.instance.SetCompleteScreen(true));
     }
 
-    internal void UsePause(int playing = 0)
+    public void UsePause(int playing = 0)
     {
         // Set Pause Mode
         if (playing == 1)
@@ -264,6 +264,8 @@ public class GameManager : MonoBehaviour
         {
             isPlaying = !isPlaying;
         }
+
+        Time.timeScale = isPlaying ? 1f : 0f;
 
         UIManager.instance.SetPause(isPlaying);
     }

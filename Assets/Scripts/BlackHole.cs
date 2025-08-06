@@ -14,8 +14,15 @@ public class BlackHole : MonoBehaviour
     [SerializeField] private string AffectedObjectTag = "Player";
     private void OnTriggerEnter2D(Collider2D other)
     {
+        bool affectable = false;
+
+        if (GameManager.instance)
+        {
+            affectable = GameManager.instance.isPlaying;
+        }
+        
         // "Player" 태그를 가진 객체가 들어오면
-        if ((AffectedObjectTag == "Player") && other.CompareTag(AffectedObjectTag))
+        if ((AffectedObjectTag == "Player") && other.CompareTag(AffectedObjectTag) && affectable)
         {
             UIManager.instance.ActivateAnnoucer(15);
         }
