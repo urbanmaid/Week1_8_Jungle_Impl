@@ -10,6 +10,7 @@ using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 using UnityEditor.Localization.Plugins.XLIFF.V12;
 using System.Collections.Generic;
+using UnityEngine.Audio;
 
 public class UIManager : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TMP_Dropdown languageDropdown;
 
     [Header("UI Sounds")]
+    [SerializeField] AudioMixer mixer;
     [SerializeField] AudioClip clipUISelect;
     [SerializeField] AudioClip clipUIConfirm;
     [SerializeField] AudioClip clipUIClear;
@@ -341,6 +343,14 @@ public class UIManager : MonoBehaviour
 
     public void Restart()
     {
+        StartCoroutine(RestartCo());
+    }
+
+    IEnumerator RestartCo()
+    {
+        PlayUIAudioClip(clipUIConfirm);
+        yield return new WaitForSeconds(clipUIClear.length);
+
         Scene scene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(scene.name);
     }
@@ -370,7 +380,7 @@ public class UIManager : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
         PlayUIAudioClip(clipUIClear);
-        
+
         completePanel.SetActive(value);
         scoreTextComplete.text = "" + gm.scoreTotal;
     }
@@ -458,11 +468,20 @@ public class UIManager : MonoBehaviour
         // PlayerPrefs에 자동으로 저장되므로 수동으로 저장할 필요가 없습니다.
         yield return LocalizationSettings.InitializationOperation;
 
-        Debug.Log($"언어가 {selectedLocale.LocaleName}(으)로 변경되었습니다.");
-
         // 드롭다운을 다시 활성화합니다.
         languageDropdown.interactable = true;
     }
+
+    public void SetAudioValue(string mixerType, float volume)
+    {
+        // Input is "SFX"
+        // "SFX" is located in Master
+        // AudioMixer mixer
+        volume = Mathf.Clamp(volume, 0.0001f, 1f);
+        mixer.SetFloat(mixerType, Mathf.Log10(volume) * 20);
+    }
+
+    // Use Slider as Volume control
 
     public void SettingsClose()
     {
@@ -471,6 +490,9 @@ public class UIManager : MonoBehaviour
 
         PlayUIAudioClip(clipUISelect);
     }
+
+    #endregion
+    #region Audio FX
 
     public void PlayUISelect()
     {
