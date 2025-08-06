@@ -5,10 +5,8 @@ using TMPro;
 using System;
 using System.Collections;
 using UnityEngine.Localization;
-using UnityEngine.Localization.Tables;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 
